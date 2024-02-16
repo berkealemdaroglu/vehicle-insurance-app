@@ -19,15 +19,13 @@ class HomeFragmentViewModel @Inject constructor(private val insureUseCase: Insur
     val vehicleInsuranceResponse: StateFlow<VehicleInsuranceResponse?> = _vehicleInsuranceResponse
 
     fun getVehicle(
-        coroutineScopeMain: CoroutineDispatcher = Dispatchers.Main,
         coroutineScopeIO: CoroutineDispatcher = Dispatchers.IO
     ) {
         viewModelScope.launch(coroutineScopeIO) {
             insureUseCase.getVehicleInsurance().collectNetworkResult(
+                coroutineScope = this,
                 onSuccess = { data ->
-                    viewModelScope.launch {
-                        _vehicleInsuranceResponse.emit(data)
-                    }
+                    _vehicleInsuranceResponse.emit(data)
                 },
                 onError = { errorMessage ->
                     // Hata işleme. Gerekirse burada da withContext kullanabilirsiniz

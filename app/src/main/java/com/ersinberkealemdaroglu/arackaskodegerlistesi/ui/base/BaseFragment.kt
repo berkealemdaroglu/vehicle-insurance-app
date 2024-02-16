@@ -11,10 +11,10 @@ import androidx.viewbinding.ViewBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customViews.InsureProgressDialog
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
-    private val inflate: (inflater: LayoutInflater,
-                          container: ViewGroup?,
-                          attachToRoot: Boolean) -> VB)
-    : Fragment() {
+    private val inflate: (
+        inflater: LayoutInflater, container: ViewGroup?, attachToRoot: Boolean
+    ) -> VB
+) : Fragment() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding
