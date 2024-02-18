@@ -23,29 +23,21 @@ object NetworkModule {
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            //level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
     }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext appContext: Context, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(ChuckerInterceptor.Builder(context = appContext).build())
-            .build()
+        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(ChuckerInterceptor.Builder(context = appContext).build()).build()
     }
 
 }

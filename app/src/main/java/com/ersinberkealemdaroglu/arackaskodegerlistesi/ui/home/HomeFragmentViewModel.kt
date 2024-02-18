@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.InsureUseCase
@@ -22,17 +23,20 @@ class HomeFragmentViewModel @Inject constructor(private val insureUseCase: Insur
         coroutineScopeIO: CoroutineDispatcher = Dispatchers.IO
     ) {
         viewModelScope.launch(coroutineScopeIO) {
-            insureUseCase.getVehicleInsurance().collectNetworkResult(
-                coroutineScope = this,
-                onSuccess = { data ->
-                    _vehicleInsuranceResponse.emit(data)
-                },
-                onError = { errorMessage ->
-                    // Hata işleme. Gerekirse burada da withContext kullanabilirsiniz
-                }
+            insureUseCase.getVehicleInsurance().collectNetworkResult(onSuccess = { data ->
+                Log.e("ersin", "data geldi")
+                _vehicleInsuranceResponse.emit(data)
+            }, onError = { errorMessage ->
+                Log.e(VM_ERROR, errorMessage)
+            }/*, onLoading = {
+                activateLoadingState()
+            }*/
             )
         }
     }
 
 
+    companion object {
+        const val VM_ERROR = "VM ERROR"
+    }
 }
