@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
@@ -15,7 +16,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
         viewModel.getVehicle()
 
         viewModel.vehicleInsuranceResponse.collectWhenPrimitiveTypeStarted(viewLifecycleOwner) {
-            println(it)
+
+            it?.years?.forEach {
+                Log.e("ersin", it?.year.toString())
+            }
+
         }
     }
 }
