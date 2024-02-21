@@ -2,7 +2,9 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.service.InsureService
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.BASE_URL
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,9 +31,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
+    fun provideInsureService(retrofit: Retrofit): InsureService {
+        return retrofit.create(InsureService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create(gson)).build()
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = Gson()
 
     @Provides
     @Singleton

@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
+        android:id="@+id/yearButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginHorizontal="16dp"
+        android:gravity="start|center"
+        android:paddingStart="24dp"
+        android:text="Model Yılı"
+        android:textAllCaps="false" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/brandButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="start|center"
+        android:paddingStart="24dp"
+        android:text="Marka"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/modelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="start|center"
+        android:paddingStart="24dp"
+        android:text="Model"
+        android:textAllCaps="false" />
+
+</LinearLayout>

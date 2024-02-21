@@ -1,11 +1,9 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
 
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenPrimitiveTypeStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,14 +11,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
     override val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun initUI(view: View) {
-        viewModel.getVehicle()
+        insureButtonHandle()
+    }
 
-        viewModel.vehicleInsuranceResponse.collectWhenPrimitiveTypeStarted(viewLifecycleOwner) {
-
-            it?.years?.forEach {
-                Log.e("ersin", it?.year.toString())
+    private fun insureButtonHandle() {
+        binding?.apply {
+            yearButton.setOnClickListener {
+                viewModel.vehicleInsuranceMapper.filterByYear {
+                    viewModel.setSelectedVehicle(yearList = it)
+                    //openBottomSheet
+                }
             }
 
+            brandButton.setOnClickListener {
+                viewModel.vehicleInsuranceMapper.filterByBrand(viewModel.getYear) {
+                    viewModel.setSelectedVehicle(brandList = it)
+                    //openBottomSheet
+                }
+            }
+
+            modelButton.setOnClickListener {
+                viewModel.vehicleInsuranceMapper.filterByYearAndBrand(viewModel.getYear, viewModel.getBrand) {
+                    viewModel.setSelectedVehicle(brand = it)
+                    //openBottomSheet
+                }
+            }
         }
     }
 }

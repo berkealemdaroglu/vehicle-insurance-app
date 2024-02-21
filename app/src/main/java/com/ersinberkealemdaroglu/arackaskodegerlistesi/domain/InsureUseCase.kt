@@ -8,8 +8,6 @@ import javax.inject.Inject
 
 class InsureUseCase @Inject constructor(private val insureRepository: InsureRepository) {
 
-    fun getVehicleInsurance(): Flow<NetworkResult<VehicleInsuranceResponse>> {
+    fun getVehicleInsurance(): Flow<NetworkResult<VehicleInsuranceResponse>> = insureRepository.getVehicleInsurance()
 
-        return insureRepository.getVehicleInsurance()
-    }
 }
