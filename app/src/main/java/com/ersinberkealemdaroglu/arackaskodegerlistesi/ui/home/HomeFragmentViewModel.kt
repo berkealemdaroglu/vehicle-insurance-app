@@ -33,7 +33,9 @@ class HomeFragmentViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.getVehicleInsurance().collectNetworkResult(coroutineScope = this, onSuccess = { data ->
+            insureUseCase.getVehicleInsurance().collectNetworkResult(
+                coroutineDispatcher = dispatcherIO,
+                onSuccess = { data ->
                 vehicleInsuranceMapper = VehicleInsuranceMapper(data)
             }, onError = { errorMessage ->
                 // Hata işleme. Gerekirse burada da withContext kullanabilirsiniz

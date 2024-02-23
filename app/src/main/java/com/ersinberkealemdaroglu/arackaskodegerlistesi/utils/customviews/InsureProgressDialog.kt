@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customViews
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews
 
 import android.app.Dialog
 import android.content.Context
