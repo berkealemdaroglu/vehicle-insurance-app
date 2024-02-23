@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditCalculator
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator
 
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.InsureUseCase
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseViewModel

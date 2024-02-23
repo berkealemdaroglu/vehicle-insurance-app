@@ -1,7 +1,7 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model
 
 import android.os.Parcelable
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.SelectedVehicleFilterItem
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 

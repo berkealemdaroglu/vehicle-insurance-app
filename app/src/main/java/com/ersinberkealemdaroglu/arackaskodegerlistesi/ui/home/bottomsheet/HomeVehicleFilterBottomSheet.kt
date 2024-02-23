@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet
 
 import android.view.View
 import androidx.fragment.app.activityViewModels
