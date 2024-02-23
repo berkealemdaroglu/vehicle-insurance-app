@@ -14,15 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setToolbar(isLeftButtonClickable = false)
+        setToolbar()
     }
 
     fun setToolbar(
         leftIconDrawable: Int? = R.drawable.ic_insure_app_logo,
         title: String = getString(R.string.arac_kasko_deger_listesi),
         rightIconDrawable: Int? = R.drawable.ic_favorite,
-        isLeftButtonClickable: Boolean = true,
-        isRightButtonClickable: Boolean = true,
         leftButtonClickListener: (() -> Unit)? = null,
         rightButtonClickListener: (() -> Unit)? = null
     ) {
@@ -30,8 +28,6 @@ class MainActivity : AppCompatActivity() {
             setLeftIcon(leftIconDrawable)
             setTitle(title)
             setRightIcon(rightIconDrawable)
-            setLeftButtonClickableState(isLeftButtonClickable)
-            setRightButtonClickableState(isRightButtonClickable)
             setOnLeftIconClickListener {
                 leftButtonClickListener?.invoke()
             }

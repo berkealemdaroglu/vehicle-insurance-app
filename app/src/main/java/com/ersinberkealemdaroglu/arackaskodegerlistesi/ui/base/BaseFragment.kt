@@ -58,7 +58,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
 
     override fun onResume() {
         super.onResume()
-            setToolbarStateForFragments(this)
+        setToolbarStateForFragments(this)
     }
 
     private fun setToolbarStateForFragments(fragment: Fragment) {
@@ -68,7 +68,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                     leftIconDrawable = R.drawable.ic_insure_app_logo,
                     title = getString(R.string.arac_kasko_deger_listesi),
                     rightIconDrawable = R.drawable.ic_favorite,
-                    isLeftButtonClickable = false
                 )
             }
 
@@ -77,7 +76,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                     leftIconDrawable = R.drawable.btn_back,
                     title = getString(R.string._400_bin_tl_alti_araclar),
                     rightIconDrawable = R.drawable.ic_filter,
-                    leftButtonClickListener = { findNavController().navigateUp()},
+                    leftButtonClickListener = { findNavController().navigateUp() },
                     rightButtonClickListener = { fragment.openFilterBottomSheet() }
 
                 )

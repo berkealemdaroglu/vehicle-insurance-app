@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.CustomToolbarBinding
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
 
 class CustomToolbar @JvmOverloads constructor(
     context: Context,
@@ -15,7 +13,7 @@ class CustomToolbar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding : CustomToolbarBinding by lazy {
+    private val binding: CustomToolbarBinding by lazy {
         CustomToolbarBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
@@ -27,22 +25,8 @@ class CustomToolbar @JvmOverloads constructor(
         resourceId?.let { binding.leftIcon.setImageResource(it) }
     }
 
-    fun setLeftButtonClickableState(clickable: Boolean) {
-        binding.apply {
-            leftIcon.isClickable = clickable
-            leftIcon.isEnabled = clickable
-        }
-    }
-
     fun setRightIcon(resourceId: Int?) {
         resourceId?.let { binding.rightIcon.setImageResource(it) }
-    }
-
-    fun setRightButtonClickableState(clickable: Boolean) {
-        binding.apply {
-            rightIcon.isClickable = clickable
-            rightIcon.isEnabled = clickable
-        }
     }
 
     fun setOnLeftIconClickListener(clickListener: (View) -> Unit) {
