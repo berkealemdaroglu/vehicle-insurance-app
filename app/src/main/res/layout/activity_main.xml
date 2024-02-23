@@ -7,6 +7,12 @@
     android:orientation="horizontal"
     tools:context=".ui.MainActivity">
 
+    <com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.CustomToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.CustomToolbar>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragmentContainerView"
         android:layout_width="match_parent"
@@ -14,5 +20,7 @@
         app:defaultNavHost="true"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:navGraph="@navigation/insure_app_nav_graph" />
+
+
 
 </LinearLayout>

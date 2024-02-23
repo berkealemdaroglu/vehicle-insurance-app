@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.HomeVehicleFilterBottomSheet
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.SelectedVehicleFilterItem
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customViews.InsureProgressDialog
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.InsureProgressDialog
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
     private val inflate: (

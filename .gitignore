@@ -36,6 +36,8 @@ build/
 .idea/runConfigurations/PILL_*.xml
 .idea/runConfigurations/_FP_*.xml
 .idea/runConfigurations/_MT_*.xml
+.idea/sonarlint/issuestore
+.idea/sonarlint/securityhotspotstore
 .idea/libraries
 .idea/modules.xml
 .idea/gradle.xml
