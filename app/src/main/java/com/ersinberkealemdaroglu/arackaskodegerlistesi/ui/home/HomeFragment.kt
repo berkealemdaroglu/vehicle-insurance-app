@@ -6,11 +6,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,6 +24,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
     override fun initUI(view: View) {
         insureButtonHandle()
         selectedVehicleState()
+        getLowPriceVehicles()
+        errorHandling()
     }
 
     private fun insureButtonHandle() {
@@ -111,6 +115,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
             binding?.creditCalculatorButton?.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToCreditCalculatorFragment(brand)
                 findNavController().navigate(action)
+            }
+        }
+    }
+
+    private fun getLowPriceVehicles() {
+        lifecycleScope.launch {
+            viewModel.lowPriceVehicles.collectLatest {
+                if (it != null) {
+                    openCarSearhFragment(it)
+                }
+            }
+        }
+    }
+
+    private fun openCarSearhFragment(carDataResponseModel: CarDataResponseModel) {
+        binding?.btnGoSearchFragment?.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToVehicleSearchListFragment(carDataResponseModel)
+            findNavController().navigate(action)
+        }
+
+    }
+
+    private fun errorHandling() {
+        lifecycleScope.launch {
+            viewModel.errorMessage.collectLatest { errorMessage ->
+                if (errorMessage != null) {
+                    context?.showToastMessage(errorMessage)
+                }
             }
         }
     }

@@ -95,4 +95,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
+    //Meterial Design 3
+  // implementation 'androidx.compose.material3:material3:1.9.0'
+
 }

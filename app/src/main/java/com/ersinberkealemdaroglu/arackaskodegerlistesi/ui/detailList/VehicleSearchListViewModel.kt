@@ -6,4 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class VehicleSearchListViewModel @Inject constructor(private val insureUseCase: InsureUseCase) : BaseViewModel()
+class VehicleSearchListViewModel @Inject constructor(
+    private val insureUseCase: InsureUseCase
+) : BaseViewModel()

@@ -12,4 +12,8 @@ class InsureRepositoryImp @Inject constructor(private val insureDataSource: Insu
         insureDataSource.getVehicleInsurance()
     }
 
+    override fun getLowVehicles() = runRepositorySafe {
+        insureDataSource.getLowVehicles()
+    }
+
 }

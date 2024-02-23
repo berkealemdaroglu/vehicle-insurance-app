@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_creditCalculatorFragment"
             app:destination="@id/creditCalculatorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vehicleSearchListFragment"
+            app:destination="@id/vehicleSearchListFragment" />
     </fragment>
     <fragment
         android:id="@+id/creditCalculatorFragment"
@@ -33,5 +36,14 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/navigation"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleSearchListFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment"
+        android:label="fragment_vehicle_search_list"
+        tools:layout="@layout/fragment_vehicle_search_list" >
+        <argument
+            android:name="lowPriceCars"
+            app:argType="com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel" />
     </fragment>
 </navigation>

@@ -3,6 +3,7 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.CustomToolbarBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
@@ -18,25 +19,38 @@ class CustomToolbar @JvmOverloads constructor(
         CustomToolbarBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
-    fun setTitle(text: String) {
+    fun setTitle(text: String?) {
         binding.toolbarTitle.text = text
     }
 
-    fun setLeftIcon(resourceId: Int) {
-        binding.leftIcon.setImageResource(resourceId)
+    fun setLeftIcon(resourceId: Int?) {
+        resourceId?.let { binding.leftIcon.setImageResource(it) }
     }
 
-    fun setRightIcon(resourceId: Int) {
-        binding.rightIcon.setImageResource(resourceId)
-    }
-
-    fun setBackButtonVisibleState(visible: Boolean) {
-        if (visible) {
-            binding.leftIcon.visible()
-        } else {
-            binding.leftIcon.gone()
+    fun setLeftButtonClickableState(clickable: Boolean) {
+        binding.apply {
+            leftIcon.isClickable = clickable
+            leftIcon.isEnabled = clickable
         }
     }
 
+    fun setRightIcon(resourceId: Int?) {
+        resourceId?.let { binding.rightIcon.setImageResource(it) }
+    }
+
+    fun setRightButtonClickableState(clickable: Boolean) {
+        binding.apply {
+            rightIcon.isClickable = clickable
+            rightIcon.isEnabled = clickable
+        }
+    }
+
+    fun setOnLeftIconClickListener(clickListener: (View) -> Unit) {
+        binding.leftIcon.setOnClickListener(clickListener)
+    }
+
+    fun setOnRightIconClickListener(clickListener: (View) -> Unit) {
+        binding.rightIcon.setOnClickListener(clickListener)
+    }
 
 }

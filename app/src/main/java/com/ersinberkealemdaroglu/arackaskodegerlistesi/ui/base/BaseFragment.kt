@@ -7,7 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.MainActivity
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.HomeVehicleFilterBottomSheet
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.InsureProgressDialog
@@ -49,6 +54,35 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
 
         insureProgressDialogSetup()
         initUI(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+            setToolbarStateForFragments(this)
+    }
+
+    private fun setToolbarStateForFragments(fragment: Fragment) {
+        when (fragment) {
+            is HomeFragment -> {
+                (activity as? MainActivity)?.setToolbar(
+                    leftIconDrawable = R.drawable.ic_insure_app_logo,
+                    title = getString(R.string.arac_kasko_deger_listesi),
+                    rightIconDrawable = R.drawable.ic_favorite,
+                    isLeftButtonClickable = false
+                )
+            }
+
+            is VehicleSearchListFragment -> {
+                (activity as? MainActivity)?.setToolbar(
+                    leftIconDrawable = R.drawable.btn_back,
+                    title = getString(R.string._400_bin_tl_alti_araclar),
+                    rightIconDrawable = R.drawable.ic_filter,
+                    leftButtonClickListener = { findNavController().navigateUp()},
+                    rightButtonClickListener = { fragment.openFilterBottomSheet() }
+
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {
