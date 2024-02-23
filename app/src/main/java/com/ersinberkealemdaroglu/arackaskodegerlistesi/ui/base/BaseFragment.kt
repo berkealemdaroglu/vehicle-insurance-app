@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.HomeVehicleFilterBottomSheet
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.SelectedVehicleFilterItem
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.HomeVehicleFilterBottomSheet
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.InsureProgressDialog
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(

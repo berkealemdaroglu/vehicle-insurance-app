@@ -1,6 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.network
 
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.errorModel.ErrorModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.errormodel.ErrorModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.CONNECT_EXCEPTION
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.SOCKET_TIME_OUT_EXCEPTION
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.UNKNOWN_HOST_EXCEPTION

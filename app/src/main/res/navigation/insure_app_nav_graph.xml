@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/creditCalculatorFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditCalculator.CreditCalculatorFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator.CreditCalculatorFragment"
         android:label="fragment_credit_calculator"
         tools:layout="@layout/fragment_credit_calculator">
         <argument

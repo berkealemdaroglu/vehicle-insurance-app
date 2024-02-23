@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditCalculator
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator
 
 import android.view.View
 import androidx.fragment.app.viewModels

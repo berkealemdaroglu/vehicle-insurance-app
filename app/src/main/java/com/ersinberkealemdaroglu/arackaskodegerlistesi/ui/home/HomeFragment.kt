@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.SelectedVehicleFilterItem
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import dagger.hilt.android.AndroidEntryPoint

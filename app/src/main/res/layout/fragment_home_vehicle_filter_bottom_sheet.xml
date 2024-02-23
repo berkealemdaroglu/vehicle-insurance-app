@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.bottomSheet.HomeVehicleFilterBottomSheet">
+    tools:context=".ui.home.bottomsheet.HomeVehicleFilterBottomSheet">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filterRV"

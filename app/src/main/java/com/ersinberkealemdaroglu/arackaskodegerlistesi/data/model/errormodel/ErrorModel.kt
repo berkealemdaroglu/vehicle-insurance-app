@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.errorModel
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.errormodel
 
 import com.google.gson.annotations.SerializedName
 import org.json.JSONObject
