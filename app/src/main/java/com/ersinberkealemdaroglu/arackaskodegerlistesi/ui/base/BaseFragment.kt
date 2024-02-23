@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.HomeVehicleFilterBottomSheet
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomSheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customViews.InsureProgressDialog
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
@@ -86,5 +88,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
             activeProgressCount = 0
             insureProgressDialog?.dismiss()
         }
+    }
+
+    protected fun openVehicleFilterBottomSheet(selectedVehicleFilterItem: SelectedVehicleFilterItem) {
+        val vehicleFilterBottomSheet = HomeVehicleFilterBottomSheet(selectedVehicleFilterItem)
+        vehicleFilterBottomSheet.show(childFragmentManager, vehicleFilterBottomSheet.tag)
     }
 }
