@@ -25,7 +25,7 @@ abstract class BaseViewModel : ViewModel() {
 
     suspend fun <T> Flow<NetworkResult<T>>.collectNetworkResult(
         onSuccess: suspend (T) -> Unit,
-        onError: ((String) -> Unit)? = null,
+        onError: suspend ((String) -> Unit),
         onLoading: () -> Unit = { activateLoadingState() },
         coroutineDispatcher: CoroutineDispatcher = Dispatchers.Main
     ) {
@@ -37,7 +37,11 @@ abstract class BaseViewModel : ViewModel() {
                         result.data?.let { onSuccess(it) }
                     }
 
-                    is NetworkResult.Error -> deactivateLoadingState { onError?.invoke(result.error) }
+                    is NetworkResult.Error -> {
+                        deactivateLoadingState()
+                        onError(result.error)
+                    }
+
                     is NetworkResult.Loading -> onLoading()
                 }
             }

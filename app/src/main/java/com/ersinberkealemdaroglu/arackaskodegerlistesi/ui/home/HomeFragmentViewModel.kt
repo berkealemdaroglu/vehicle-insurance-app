@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.di.DiModule
@@ -22,43 +23,56 @@ class HomeFragmentViewModel @Inject constructor(
 
     lateinit var vehicleInsuranceMapper: VehicleInsuranceMapper
 
-    private val _selectedVehicleModel = MutableStateFlow<FilterVehicleModel?>(null)
-    val selectedVehicleModel: StateFlow<FilterVehicleModel?> = _selectedVehicleModel
+    private val _splashLoading = MutableStateFlow<Boolean?>(null)
+    val splashLoading: StateFlow<Boolean?> = _splashLoading
 
-    private var _setYear: Int? = null
-    val getYear: Int? get() = _setYear
+    private val _selectedFilterVehicle = MutableStateFlow<FilterVehicleModel?>(null)
+    val selectedFilterVehicle: StateFlow<FilterVehicleModel?> = _selectedFilterVehicle
+
+    private val _selectedVehicle = MutableStateFlow<Brand?>(null)
+    val selectedVehicle: StateFlow<Brand?> = _selectedVehicle
+
+    private var _setYear: String? = null
+    val getYear: String? get() = _setYear
 
     private var _setBrand: String? = null
     val getBrand: String? get() = _setBrand
 
+
     init {
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.getVehicleInsurance().collectNetworkResult(
-                coroutineDispatcher = dispatcherIO,
-                onSuccess = { data ->
+            insureUseCase.getVehicleInsurance().collectNetworkResult(onSuccess = { data ->
                 vehicleInsuranceMapper = VehicleInsuranceMapper(data)
+                _splashLoading.emit(true)
             }, onError = { errorMessage ->
-                // Hata işleme. Gerekirse burada da withContext kullanabilirsiniz
+                _splashLoading.emit(false)
+                Log.e("ersin error", errorMessage)
             })
         }
     }
 
-    fun setSelectedVehicle(yearList: List<Int?>? = null, brandList: List<Brand>? = null, brand: Brand? = null) {
+    fun setSelectedFilter(brandList: List<Brand>? = null) {
         viewModelScope.launch {
-            _selectedVehicleModel.emit(
+            _selectedFilterVehicle.emit(brandList?.let {
                 FilterVehicleModel(
-                    filterYearList = yearList, filterBrandsList = brandList, filterBrand = brand
+                    filterBrandsList = it
                 )
-            )
+            })
         }
     }
 
-    fun setVehicleYear(year: Int) {
+    fun setVehicleYear(year: String) {
         _setYear = year
     }
 
     fun setVehicleBrand(brand: String?) {
         _setBrand = brand
+    }
+
+    fun setSelectedVehicle(brand: Brand) {
+        viewModelScope.launch {
+            _selectedVehicle.emit(brand)
+        }
     }
 
 }
