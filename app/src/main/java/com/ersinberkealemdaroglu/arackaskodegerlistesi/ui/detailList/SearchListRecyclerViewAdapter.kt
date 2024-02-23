@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemSearchScreenCarsBinding
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImage
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
 
 class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerViewAdapter.SearchListViewHolder>() {
 
@@ -37,8 +37,8 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
 
         fun bind(carModel: CarDataResponseModel.CarDataResponseModelItem) {
             binding.apply {
-                carModel.vehicleImages[0].vehicleImage?.let { imgvBackground.loadImage(it) }
-                val carInfo = carModel.vehicleTitle + carModel.vehicleYear + carModel.vehicleHp
+                carModel.vehicleImages[0].vehicleImage?.let { imgvBackground.loadImageFromURL(it) }
+                val carInfo = carModel.vehicleTitle + " " + carModel.vehicleYear + " " + carModel.vehicleHp
                 tvModel.text = carInfo
             }
         }

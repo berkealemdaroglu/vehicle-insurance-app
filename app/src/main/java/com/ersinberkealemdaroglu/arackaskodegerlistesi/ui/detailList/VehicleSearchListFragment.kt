@@ -12,13 +12,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class VehicleSearchListFragment :
-    BaseFragment<FragmentVehicleSearchListBinding, VehicleSearchListViewModel>(FragmentVehicleSearchListBinding::inflate) {
+    BaseFragment<FragmentVehicleSearchListBinding, VehicleSearchListViewModel>(
+        FragmentVehicleSearchListBinding::inflate
+    ) {
 
     override val viewModel: VehicleSearchListViewModel by viewModels()
     private val args: VehicleSearchListFragmentArgs by navArgs()
     private val cars by lazy { args.lowPriceCars }
     private val adapter = SearchListRecyclerViewAdapter()
-
 
     override fun initUI(view: View) {
         setRecyclerView(cars)
@@ -35,21 +36,22 @@ class VehicleSearchListFragment :
 
     private fun setSearchView() {
         binding?.apply {
-            searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            searchView.setOnQueryTextListener(object :
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
 
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                 filterCarList(newText)
+                    filterCarList(newText)
                     return true
                 }
             })
         }
     }
 
-    private fun filterCarList(queryText: String?){
+    private fun filterCarList(queryText: String?) {
         val filteredCars = if (queryText.isNullOrEmpty()) {
             cars
         } else {
@@ -62,8 +64,11 @@ class VehicleSearchListFragment :
     }
 
     fun openFilterBottomSheet() {
-        /*val bottomSheet = HomeVehicleFilterBottomSheet()
-        bottomSheet.show(parentFragmentManager, bottomSheet.tag)*/
-        requireContext().showToastMessage("Filter is not implemented yet")
+        val filterBottomSheet = FilterBottomSheet(cars)
+        filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+
+        filterBottomSheet.onItemClicked = {
+            adapter.setData(it)
+        }
     }
 }

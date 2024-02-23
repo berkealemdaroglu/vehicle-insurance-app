@@ -78,7 +78,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                     rightIconDrawable = R.drawable.ic_filter,
                     leftButtonClickListener = { findNavController().navigateUp() },
                     rightButtonClickListener = { fragment.openFilterBottomSheet() }
-
                 )
             }
         }

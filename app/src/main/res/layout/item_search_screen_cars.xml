@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,11 +22,13 @@
         android:id="@+id/tvModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_marginStart="@dimen/margin_12dp"
-        android:layout_marginBottom="@dimen/margin_12dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_number_14sp"
+        android:textSize="@dimen/font_number_18sp"
         app:layout_constraintBottom_toBottomOf="@id/imgvBackground"
         app:layout_constraintStart_toStartOf="@id/imgvBackground"
         tools:text="Hyundai i20 2014 jump 1.2" />
