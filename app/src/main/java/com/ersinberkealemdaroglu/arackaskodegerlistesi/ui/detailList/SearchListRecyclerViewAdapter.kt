@@ -16,6 +16,8 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
         diffCallback
     )
 
+    var onItemClicked: ((CarDataResponseModel.CarDataResponseModelItem) -> Unit)? = null
+
     fun setData(items: List<CarDataResponseModel.CarDataResponseModelItem>) {
         differ.submitList(items)
     }
@@ -26,7 +28,7 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
 
     override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
         val user = differ.currentList[position]
-        holder.bind(user)
+        holder.bind(user, onItemClicked)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
@@ -35,11 +37,18 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
         private val binding: ItemSearchScreenCarsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(carModel: CarDataResponseModel.CarDataResponseModelItem) {
+        fun bind(
+            carModel: CarDataResponseModel.CarDataResponseModelItem,
+            onItemClicked: ((CarDataResponseModel.CarDataResponseModelItem) -> Unit)?
+        ) {
             binding.apply {
-                carModel.vehicleImages[0].vehicleImage?.let { imgvBackground.loadImageFromURL(it) }
+                carModel.vehicleImages?.get(0)?.vehicleImage?.let { imgvBackground.loadImageFromURL(it) }
                 val carInfo = carModel.vehicleTitle + " " + carModel.vehicleYear + " " + carModel.vehicleHp
                 tvModel.text = carInfo
+
+                root.setOnClickListener {
+                    onItemClicked?.invoke(carModel)
+                }
             }
         }
 

@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setToolbar(
-        leftIconDrawable: Int? = R.drawable.ic_insure_app_logo,
-        title: String = getString(R.string.arac_kasko_deger_listesi),
-        rightIconDrawable: Int? = R.drawable.ic_favorite,
+        leftIconDrawable: Int? = null,
+        title: String = "",
+        rightIconDrawable: Int? = null,
         leftButtonClickListener: (() -> Unit)? = null,
         rightButtonClickListener: (() -> Unit)? = null
     ) {

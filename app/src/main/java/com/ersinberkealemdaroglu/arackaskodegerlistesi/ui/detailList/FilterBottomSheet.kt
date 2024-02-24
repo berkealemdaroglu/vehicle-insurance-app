@@ -11,8 +11,12 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseBottomSheet
 class FilterBottomSheet(private val carData: CarDataResponseModel) :
     BaseBottomSheet<BottomSheetFilterBinding>(BottomSheetFilterBinding::inflate) {
 
-    private var selectedFilterIndex = -1 // Başlangıçta hiçbir filtre seçili değil
+    private var selectedFilterIndex = -1
     var onItemClicked: ((List<CarDataResponseModel.CarDataResponseModelItem>) -> Unit)? = null
+
+    companion object {
+        var selectedIndex: Int = -1
+    }
 
     override fun initUI(view: View) {
         val filterList = arrayListOf(
@@ -23,9 +27,18 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) :
         )
 
         filterList.forEachIndexed { index, filter ->
-            val itemBinding = ItemFilterBinding.inflate(LayoutInflater.from(view.context), binding?.linearLayout, false)
+            val itemBinding = ItemFilterBinding.inflate(
+                LayoutInflater.from(view.context),
+                binding?.linearLayout,
+                false
+            )
             itemBinding.itemText.text = filter
-            itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_passive)
+
+            if (selectedIndex != -1 && index == selectedIndex) {
+                itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_active)
+            } else {
+                itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_passive)
+            }
 
             // Tıklama dinleyicisi
             itemBinding.root.setOnClickListener {
@@ -35,8 +48,8 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) :
 
             binding?.linearLayout?.addView(itemBinding.root)
         }
-
     }
+
     private fun updateIcons() {
         // LinearLayout içindeki tüm çocuklar için döngü
         for (i in 0 until (binding?.linearLayout?.childCount ?: 0)) {
@@ -50,26 +63,33 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) :
                 // Seçili indekse göre ikonu güncelle
                 if (i == selectedFilterIndex) {
                     itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_active)
-                    when (selectedFilterIndex){
+                    when (selectedFilterIndex) {
                         0 -> {
                             // Fiyata göre (Önce en yüksek)
                             val sortByDescPrice = carData.sortedByDescending { it.vehiclePrice }
                             onItemClicked?.invoke(sortByDescPrice)
+                            selectedIndex = 0
                         }
+
                         1 -> {
                             // Fiyata göre (Önce en düşük)
                             val sortedByAscPrice = carData.sortedBy { it.vehiclePrice }
                             onItemClicked?.invoke(sortedByAscPrice)
+                            selectedIndex = 1
                         }
+
                         2 -> {
                             // Yıla göre (Önce en yeni araçlar)
                             val sortByDescYear = carData.sortedByDescending { it.vehicleYear }
                             onItemClicked?.invoke(sortByDescYear)
+                            selectedIndex = 2
                         }
+
                         3 -> {
                             // Yıla göre (Önce en eski araçlar)
                             val sortedByAscYear = carData.sortedBy { it.vehicleYear }
                             onItemClicked?.invoke(sortedByAscYear)
+                            selectedIndex = 3
                         }
                     }
                     dismiss()

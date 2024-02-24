@@ -2,12 +2,12 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentVehicleSearchListBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +24,7 @@ class VehicleSearchListFragment :
     override fun initUI(view: View) {
         setRecyclerView(cars)
         setSearchView()
+        openCreditCalculatorFragment()
     }
 
     private fun setRecyclerView(carModel: CarDataResponseModel) {
@@ -61,6 +62,17 @@ class VehicleSearchListFragment :
         }
         adapter.setData(filteredCars)
         binding?.recyclerCarsList?.smoothScrollToPosition(0)
+    }
+
+    private fun openCreditCalculatorFragment() {
+        adapter.onItemClicked = { carData ->
+            val action =
+                VehicleSearchListFragmentDirections.actionVehicleSearchListFragmentToCreditCalculatorFragment(
+                    carData
+                )
+            findNavController().navigate(action)
+        }
+
     }
 
     fun openFilterBottomSheet() {
