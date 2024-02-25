@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/single_white"
     tools:context=".ui.splash.SplashFragment">
+
+    <include layout="@layout/insure_progress_dialog" />
 
 </FrameLayout>

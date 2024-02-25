@@ -6,4 +6,7 @@
     <string name="marka_model_ve_yil_ile_arama_yapabilirsiz">Marka, model ve yıl ile arama yapabilirsiz...</string>
     <string name="_400_bin_tl_alti_araclar">400 bin TL Altı Araçlar</string>
     <string name="kredi_hesaplama">Kredi Hesaplama</string>
+    <string name="model_yili">Model Yılı</string>
+    <string name="marka">Marka</string>
+    <string name="model">Model</string>
 </resources>

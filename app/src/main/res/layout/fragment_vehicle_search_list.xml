@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background_color"
     tools:context=".ui.detailList.VehicleSearchListFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -12,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_16dp"
         app:cardCornerRadius="24dp"
-        app:cardUseCompatPadding="true"
         app:strokeWidth="2dp"
+        android:layout_marginTop="@dimen/margin_12dp"
         app:strokeColor="@color/secondary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +24,7 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/single_white"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
             app:queryHint="@string/marka_model_ve_yil_ile_arama_yapabilirsiz"
@@ -34,7 +36,8 @@
         android:id="@+id/recyclerCarsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_16dp"
+        android:clipToPadding="false"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

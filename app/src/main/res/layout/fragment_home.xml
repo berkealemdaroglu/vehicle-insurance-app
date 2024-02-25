@@ -4,90 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="24dp"
+    android:background="@color/app_background_color"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/yearButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="start|center"
-        android:paddingStart="24dp"
-        android:text="Model Yılı"
-        android:textAllCaps="false" />
+        style="@style/home_filter_button_style"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:text="@string/model_yili" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/brandButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        style="@style/home_filter_button_style"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:enabled="false"
-        android:gravity="start|center"
-        android:paddingStart="24dp"
-        android:text="Marka"
-        android:textAllCaps="false" />
+        android:text="@string/marka" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/modelButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        style="@style/home_filter_button_style"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:enabled="false"
-        android:gravity="start|center"
-        android:paddingStart="24dp"
-        android:text="Model"
-        android:textAllCaps="false" />
+        android:text="@string/model" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/insuranceVehicleLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/black"
+        android:layout_marginHorizontal="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:visibility="gone"
-        app:cardCornerRadius="20dp">
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@color/secondary_color"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/vehicleTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                style="@style/home_result_textview_style"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/font_text_16sp"
                 tools:text="Seat Ibiza 1.6 TDI" />
 
             <TextView
                 android:id="@+id/vehiclePrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                style="@style/home_result_textview_style"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/font_text_14sp"
                 tools:text="Kasko Değeri: 123124123tl" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/creditCalculatorButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kredi_hesapla" />
+                android:layout_height="@dimen/margin_40dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/margin_12dp"
+                android:background="@drawable/stroke_home_credit_button_background"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/margin_32dp"
+                android:text="@string/kredi_hesapla"
+                android:textAllCaps="false"
+                android:textColor="@color/single_white" />
 
         </LinearLayout>
 
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/btnGoSearchFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="@dimen/margin_32dp"
-        android:text="Go Search"
-        android:textAllCaps="false" />
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:layout_weight="2"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text="400 Bin TL Araçlar"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_16sp" />
+
+        <TextView
+            android:id="@+id/lowPriceVehicleBtnGoSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="end"
+            android:maxLines="1"
+            android:minLines="1"
+            android:paddingVertical="@dimen/margin_4dp"
+            android:text="Tümünü Gör"
+            android:textColor="@color/secondary_color"
+            android:textSize="@dimen/font_text_14sp" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lowPriceVehicleRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/margin_12dp"
+        android:paddingEnd="@dimen/margin_12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_home_fragment_cars" />
 
 </LinearLayout>
