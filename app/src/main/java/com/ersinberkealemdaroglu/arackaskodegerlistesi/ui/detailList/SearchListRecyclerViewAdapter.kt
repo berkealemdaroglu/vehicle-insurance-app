@@ -5,20 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemSearchScreenCarsBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
 
 class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerViewAdapter.SearchListViewHolder>() {
 
     private val differ = AsyncListDiffer(
-        this,
-        diffCallback
+        this, diffCallback
     )
 
-    var onItemClicked: ((CarDataResponseModel.CarDataResponseModelItem) -> Unit)? = null
+    var onItemClicked: ((CarDataResponseModelItem) -> Unit)? = null
 
-    fun setData(items: List<CarDataResponseModel.CarDataResponseModelItem>) {
+    fun setData(items: List<CarDataResponseModelItem>) {
         differ.submitList(items)
     }
 
@@ -38,8 +37,7 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            carModel: CarDataResponseModel.CarDataResponseModelItem,
-            onItemClicked: ((CarDataResponseModel.CarDataResponseModelItem) -> Unit)?
+            carModel: CarDataResponseModelItem, onItemClicked: ((CarDataResponseModelItem) -> Unit)?
         ) {
             binding.apply {
                 carModel.vehicleImages?.get(0)?.vehicleImage?.let { imgvBackground.loadImageFromURL(it) }
@@ -63,17 +61,15 @@ class SearchListRecyclerViewAdapter : RecyclerView.Adapter<SearchListRecyclerVie
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<CarDataResponseModel.CarDataResponseModelItem>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<CarDataResponseModelItem>() {
             override fun areItemsTheSame(
-                oldItem: CarDataResponseModel.CarDataResponseModelItem,
-                newItem: CarDataResponseModel.CarDataResponseModelItem
+                oldItem: CarDataResponseModelItem, newItem: CarDataResponseModelItem
             ): Boolean {
                 return oldItem.vehicleTitle == newItem.vehicleTitle
             }
 
             override fun areContentsTheSame(
-                oldItem: CarDataResponseModel.CarDataResponseModelItem,
-                newItem: CarDataResponseModel.CarDataResponseModelItem
+                oldItem: CarDataResponseModelItem, newItem: CarDataResponseModelItem
             ): Boolean {
                 return oldItem == newItem
             }
