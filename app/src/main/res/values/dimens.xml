@@ -15,6 +15,8 @@
     <dimen name="font_number_18sp">18sp</dimen>
 
     <!-- Margins & Paddings -->
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_6dp">6dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>

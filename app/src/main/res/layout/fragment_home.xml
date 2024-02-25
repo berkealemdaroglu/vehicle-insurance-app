@@ -81,4 +81,13 @@
 
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/btnGoSearchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:text="Go Search"
+        android:textAllCaps="false" />
+
 </LinearLayout>

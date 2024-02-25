@@ -5,4 +5,5 @@
     <color name="primary_color">#ECEEFE</color>
     <color name="secondary_color">#164863</color>
     <color name="toolbar_text_color">#001C30</color>
+    <color name="grey_medium">#9AA3B2</color>
 </resources>
