@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
 
+import android.content.Context
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -10,9 +11,9 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeB
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -20,6 +21,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
     override val viewModel: HomeFragmentViewModel by activityViewModels()
 
     override fun initUI(view: View) {
+
         insureButtonHandle()
         selectedVehicleState()
     }
@@ -47,11 +49,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
                 }
             }
         }
+
+
+        // 400K altı araçların dosya olarak yazılmasını sağlayan kod. Daha sonra silinecek.
+        viewModel.vehicleInsuranceMapper.filterByLowQualityVehicle { lowPriceString ->
+            context?.openFileOutput("LowPriceList.txt", Context.MODE_PRIVATE).use {
+                it?.write(lowPriceString.toByteArray())
+            }
+        }
+
+
     }
 
     private fun selectedVehicleState() {
-        lifecycleScope.launch {
-            viewModel.selectedVehicle.collectLatest { brand ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectedVehicle.collectWhenStarted(viewLifecycleOwner) { brand ->
                 if (brand != null) {
                     binding?.apply {
                         when (brand.isSelectedVehicle) {
@@ -84,7 +96,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
             modelButton.text = MODEL_BUTTON_TEXT
             modelButton.isEnabled = false
             insuranceVehicleLayout.collapse()
-            // açık olan kasko bedel layoutu kapat
         }
     }
 
@@ -95,16 +106,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
             modelButton.text = MODEL_BUTTON_TEXT
             modelButton.isEnabled = true
             insuranceVehicleLayout.collapse()
-            // açık olan kasko bedel layoutu kapat
         }
     }
 
     private fun selectModelButtonUI(brand: Brand) {
         binding?.apply {
-            // motionlayout ile kasko layoutunu visible değilse yap.
+            yearButton.text = brand.years
+            yearButton.isEnabled = true
+            brandButton.text = brand.brandName
+            brandButton.isEnabled = true
             vehicleTitle.text = brand.brandName + " " + brand.vehicleModels?.firstOrNull()?.modelName
             vehiclePrice.text = brand.vehicleModels?.firstOrNull()?.price.toString()
             modelButton.text = brand.vehicleModels?.firstOrNull()?.modelName
+            modelButton.isEnabled = true
 
             if (!insuranceVehicleLayout.isVisible) insuranceVehicleLayout.expand()
 
