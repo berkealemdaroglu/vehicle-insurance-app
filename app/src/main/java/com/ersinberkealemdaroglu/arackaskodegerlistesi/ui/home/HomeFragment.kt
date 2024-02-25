@@ -7,12 +7,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,6 +26,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
 
         insureButtonHandle()
         selectedVehicleState()
+        getLowPriceVehicles()
+        errorHandling()
     }
 
     private fun insureButtonHandle() {
@@ -111,20 +115,64 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
 
     private fun selectModelButtonUI(brand: Brand) {
         binding?.apply {
+            // motionlayout ile kasko layoutunu visible değilse yap.
+            val vehicleTitleStr =
+                brand.brandName + " " + brand.vehicleModels?.firstOrNull()?.modelName
+            vehicleTitle.text = vehicleTitleStr
             yearButton.text = brand.years
             yearButton.isEnabled = true
             brandButton.text = brand.brandName
             brandButton.isEnabled = true
-            vehicleTitle.text = brand.brandName + " " + brand.vehicleModels?.firstOrNull()?.modelName
             vehiclePrice.text = brand.vehicleModels?.firstOrNull()?.price.toString()
             modelButton.text = brand.vehicleModels?.firstOrNull()?.modelName
             modelButton.isEnabled = true
 
             if (!insuranceVehicleLayout.isVisible) insuranceVehicleLayout.expand()
 
+            val carInfo = CarDataResponseModel.CarDataResponseModelItem(
+                vehicleTitle = vehicleTitleStr,
+                vehiclePrice = brand.vehicleModels?.firstOrNull()?.price.toString(),
+                vehicleYear = viewModel.getYear,
+                vehicleBrand = brand.brandName,
+                vehicleModel = brand.vehicleModels?.firstOrNull()?.modelName,
+                // burası ersinle konuşulacak
+                //  vehicleLoanAmount = brand.vehicleModels?.firstOrNull()?.loanAmount.toString(),
+            )
+
             binding?.creditCalculatorButton?.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToCreditCalculatorFragment(brand)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToCreditCalculatorFragment(carInfo)
                 findNavController().navigate(action)
+            }
+        }
+    }
+
+    private fun getLowPriceVehicles() {
+        lifecycleScope.launch {
+            viewModel.lowPriceVehicles.collectLatest {
+                if (it != null) {
+                    openCarSearchFragment(it)
+                }
+            }
+        }
+    }
+
+    private fun openCarSearchFragment(carDataResponseModel: CarDataResponseModel) {
+        binding?.btnGoSearchFragment?.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToVehicleSearchListFragment(
+                carDataResponseModel
+            )
+            findNavController().navigate(action)
+        }
+
+    }
+
+    private fun errorHandling() {
+        lifecycleScope.launch {
+            viewModel.errorMessage.collectLatest { errorMessage ->
+                if (errorMessage != null) {
+                    context?.showToastMessage(errorMessage)
+                }
             }
         }
     }

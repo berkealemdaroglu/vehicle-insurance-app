@@ -9,8 +9,16 @@
         android:id="@+id/filterItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:paddingVertical="12dp"
         android:textSize="16sp"
+        android:layout_marginHorizontal="@dimen/margin_16dp"
         tools:text="Vehicle Item" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/margin_8dp"
+        android:background="@color/secondary_color" />
 
 </LinearLayout>

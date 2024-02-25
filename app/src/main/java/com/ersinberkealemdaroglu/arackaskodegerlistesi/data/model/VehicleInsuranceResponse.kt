@@ -17,9 +17,11 @@ data class Years(
 
 @Parcelize
 data class Brand(
-    @SerializedName("marka_adi") val brandName: String? = null,
+    @SerializedName("marka_adi")
+    val brandName: String? = null,
     var years: String? = null,
-    @SerializedName("tipadlari") val vehicleModels: List<VehicleModel?>? = null,
+    @SerializedName("tipadlari")
+    val vehicleModels: List<VehicleModel?>? = null,
     val isSelectedVehicle: SelectedVehicleFilterItem? = null
 ) : Parcelable
 

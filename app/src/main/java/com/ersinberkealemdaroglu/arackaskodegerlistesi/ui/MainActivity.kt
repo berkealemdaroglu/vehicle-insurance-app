@@ -14,15 +14,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setToolbar()
     }
 
-    private fun setToolbar() {
-        binding.apply {
-            toolbar.setBackButtonVisibleState(false)
-            toolbar.setTitle(getString(R.string.arac_kasko_kodu_listesi))
-            toolbar.setRightIcon(R.drawable.btn_favorite)
+    fun setToolbar(
+        leftIconDrawable: Int? = null,
+        title: String = "",
+        rightIconDrawable: Int? = null,
+        leftButtonClickListener: (() -> Unit)? = null,
+        rightButtonClickListener: (() -> Unit)? = null
+    ) {
+        binding.toolbar.apply {
+            setLeftIcon(leftIconDrawable)
+            setTitle(title)
+            setRightIcon(rightIconDrawable)
+            setOnLeftIconClickListener {
+                leftButtonClickListener?.invoke()
+            }
+            setOnRightIconClickListener {
+                rightButtonClickListener?.invoke()
+            }
         }
 
     }
