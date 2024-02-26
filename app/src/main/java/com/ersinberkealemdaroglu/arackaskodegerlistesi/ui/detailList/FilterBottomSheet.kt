@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.BottomSheetFilterBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemFilterBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseBottomSheet
 
-class FilterBottomSheet(private val carData: CarDataResponseModel) :
-    BaseBottomSheet<BottomSheetFilterBinding>(BottomSheetFilterBinding::inflate) {
+class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomSheet<BottomSheetFilterBinding>(BottomSheetFilterBinding::inflate) {
 
     private var selectedFilterIndex = -1
-    var onItemClicked: ((List<CarDataResponseModel.CarDataResponseModelItem>) -> Unit)? = null
+    var onItemClicked: ((List<CarDataResponseModelItem>) -> Unit)? = null
 
     companion object {
         var selectedIndex: Int = -1
@@ -20,17 +20,12 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) :
 
     override fun initUI(view: View) {
         val filterList = arrayListOf(
-            "Fiyata Göre (Önce en yüksek)",
-            "Fiyata Göre (Önce en düşük)",
-            "Yıla göre (Önce en yeni araçlar)",
-            "Yıla göre (Önce en eski araçlar)"
+            "Fiyata Göre (Önce en yüksek)", "Fiyata Göre (Önce en düşük)", "Yıla göre (Önce en yeni araçlar)", "Yıla göre (Önce en eski araçlar)"
         )
 
         filterList.forEachIndexed { index, filter ->
             val itemBinding = ItemFilterBinding.inflate(
-                LayoutInflater.from(view.context),
-                binding?.linearLayout,
-                false
+                LayoutInflater.from(view.context), binding?.linearLayout, false
             )
             itemBinding.itemText.text = filter
 

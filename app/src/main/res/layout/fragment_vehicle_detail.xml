@@ -1,14 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.detail.VehicleDetailFragment">
+    android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/app_background_color"
+        android:orientation="vertical"
+        tools:context=".ui.detail.VehicleDetailFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_insure_app_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/vehicleTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_4dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@color/secondary_color"
+                android:textSize="@dimen/font_text_16sp"
+                tools:text="Vehicle Title" />
+
+            <TextView
+                android:id="@+id/vehiclePriceText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="end"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@color/secondary_color"
+                android:textSize="@dimen/font_text_16sp"
+                tools:text="Vehicle Price" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vehicleFeatureLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/creditVehicleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/primary_color"
+            app:cardCornerRadius="10dp"
+            app:strokeColor="@color/secondary_color"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/creditTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:layout_marginEnd="@dimen/margin_4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:text="Tahmini Kredi Tutarı"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/creditCalculatorButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/creditCalculatorButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="@dimen/margin_12dp"
+                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:background="@drawable/stroke_home_credit_button_background"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/margin_24dp"
+                    android:text="@string/kredi_hesapla"
+                    android:textAllCaps="false"
+                    android:textColor="@color/single_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/creditInsurancePrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_4dp"
+                    android:layout_marginEnd="@dimen/margin_4dp"
+                    android:layout_marginBottom="@dimen/margin_12dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/creditCalculatorButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/creditTitle"
+                    tools:text="Kasko Değeri: 123124123tl" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <include layout="@layout/item_credit_calculator_info_layout" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

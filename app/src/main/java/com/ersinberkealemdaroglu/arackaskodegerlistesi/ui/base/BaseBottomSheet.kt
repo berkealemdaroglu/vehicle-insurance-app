@@ -2,13 +2,14 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -40,7 +41,7 @@ abstract class BaseBottomSheet<VB : ViewBinding>(
 
         val background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            color = ColorStateList.valueOf(Color.WHITE) // Arka plan rengi
+            color = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.app_background_color)) // Arka plan rengi
             cornerRadii = floatArrayOf(
                 12f.toDp(requireContext()), // Sol üst köşe
                 12f.toDp(requireContext()), // Sol üst köşe

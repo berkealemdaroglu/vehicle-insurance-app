@@ -5,8 +5,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.adapter.HomeFragmentLowPriceVehicleAdapter
@@ -26,7 +28,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
 
     override fun initUI(view: View) {
 
-        //Todo : buttonlar customview a taşınacak. seymenle dark mode hakkında konuş.
         /**
          * core servisimiz olan insurancevehiclelist verisini her istekte çekmeyeceğiz sanırım parametrik yapabiliriz bunun için ek servis açarız paramlist tarzı.
          * Eğer error gelirse popup açar tekrar core isteği attırabiliriz. belli bir denemeden sonra lütfen daha sonra tekrar deneyin popup ı açarız.
@@ -37,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
         insureButtonHandle()
         selectedVehicleState()
         getLowPriceVehicles()
+        openCreditCalculatorFragment()
     }
 
     private fun insureButtonHandle() {
@@ -128,13 +130,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
             yearButton.isEnabled = true
             brandButton.text = brand.brandName
             brandButton.isEnabled = true
-            vehiclePrice.text = "Kasko Değeri: " + brand.vehicleModels?.firstOrNull()?.price.toString().formatPriceWithDotsForDecimal() + " ₺"
+            vehiclePrice.text =
+                getString(R.string.kasko_degeri) + brand.vehicleModels?.firstOrNull()?.price.toString().formatPriceWithDotsForDecimal() + " ₺"
             modelButton.text = brand.vehicleModels?.firstOrNull()?.modelName
             modelButton.isEnabled = true
 
             if (!insuranceVehicleLayout.isVisible) insuranceVehicleLayout.expand()
 
-            val carInfo = CarDataResponseModel.CarDataResponseModelItem(
+            val carInfo = CarDataResponseModelItem(
                 vehicleTitle = vehicleTitleStr,
                 vehiclePrice = brand.vehicleModels?.firstOrNull()?.price.toString(),
                 vehicleYear = viewModel.getYear,
@@ -165,6 +168,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
         }
     }
 
+    private fun openCreditCalculatorFragment() {
+        homeFragmentLowPriceVehicleAdapter.onItemClicked = { carData ->
+            val action = HomeFragmentDirections.actionHomeFragmentToVehicleDetailFragment(
+                carData
+            )
+            findNavController().navigate(action)
+        }
+
+    }
+
     private fun openCarSearchFragment(carDataResponseModel: CarDataResponseModel) {
         binding?.lowPriceVehicleBtnGoSearch?.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToVehicleSearchListFragment(
@@ -172,7 +185,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
             )
             findNavController().navigate(action)
         }
-
     }
 
     companion object {

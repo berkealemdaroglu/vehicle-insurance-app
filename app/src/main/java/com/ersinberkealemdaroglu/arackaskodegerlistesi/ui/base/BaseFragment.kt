@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.MainActivity
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator.CreditCalculatorFragment
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detail.VehicleDetailFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.HomeVehicleFilterBottomSheet
@@ -77,6 +78,16 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                 activityBinding?.setToolbar(
                     leftIconDrawable = R.drawable.ic_insure_app_logo,
                     title = getString(R.string.arac_kasko_deger_listesi),
+                    rightIconDrawable = R.drawable.ic_favorite,
+                )
+            }
+
+            is VehicleDetailFragment -> {
+                activityBinding?.showToolbar()
+                activityBinding?.setToolbar(
+                    leftIconDrawable = R.drawable.btn_back,
+                    leftButtonClickListener = { findNavController().navigateUp() },
+                    title = getString(R.string.arac_detay),
                     rightIconDrawable = R.drawable.ic_favorite,
                 )
             }
