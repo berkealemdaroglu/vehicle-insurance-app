@@ -21,6 +21,7 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
     private val carData by lazy { navArgs.lowPriceCar }
 
     override fun initUI(view: View) {
+        //Test edilecek
         setupUI()
         vehicleFeaturesAddView()
         navigateCreditCalculatePage()
