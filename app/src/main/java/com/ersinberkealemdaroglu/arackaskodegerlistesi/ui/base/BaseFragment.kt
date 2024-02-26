@@ -16,6 +16,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSear
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.HomeVehicleFilterBottomSheet
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.splash.SplashFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.InsureProgressDialog
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
@@ -41,9 +42,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
@@ -67,9 +66,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
     }
 
     private fun setToolbarStateForFragments(fragment: Fragment) {
+        val activityBinding = (activity as? MainActivity)
         when (fragment) {
+            is SplashFragment -> {
+                activityBinding?.hideToolbar()
+            }
+
             is HomeFragment -> {
-                (activity as? MainActivity)?.setToolbar(
+                activityBinding?.showToolbar()
+                activityBinding?.setToolbar(
                     leftIconDrawable = R.drawable.ic_insure_app_logo,
                     title = getString(R.string.arac_kasko_deger_listesi),
                     rightIconDrawable = R.drawable.ic_favorite,
@@ -77,21 +82,19 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
             }
 
             is VehicleSearchListFragment -> {
-                (activity as? MainActivity)?.setToolbar(
-                    leftIconDrawable = R.drawable.btn_back,
+                activityBinding?.showToolbar()
+                activityBinding?.setToolbar(leftIconDrawable = R.drawable.btn_back,
                     title = getString(R.string._400_bin_tl_alti_araclar),
                     rightIconDrawable = R.drawable.ic_filter,
                     leftButtonClickListener = { findNavController().navigateUp() },
-                    rightButtonClickListener = { fragment.openFilterBottomSheet() }
-                )
+                    rightButtonClickListener = { fragment.openFilterBottomSheet() })
             }
 
             is CreditCalculatorFragment -> {
-                (activity as? MainActivity)?.setToolbar(
-                    leftIconDrawable = R.drawable.btn_back,
+                activityBinding?.showToolbar()
+                activityBinding?.setToolbar(leftIconDrawable = R.drawable.btn_back,
                     title = getString(R.string.kredi_hesaplama),
-                    leftButtonClickListener = { findNavController().navigateUp() }
-                )
+                    leftButtonClickListener = { findNavController().navigateUp() })
             }
         }
     }
@@ -104,11 +107,9 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
 
     open fun hideKeyboard() {
         if (requireActivity().currentFocus != null) {
-            val inputManager =
-                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(
-                requireActivity().currentFocus!!.windowToken,
-                InputMethodManager.HIDE_NOT_ALWAYS
+                requireActivity().currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
             )
         }
     }

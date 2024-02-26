@@ -2,8 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="single_white">#FFFFFFFF</color>
     <color name="primary_color">#ECEEFE</color>
     <color name="secondary_color">#164863</color>
     <color name="toolbar_text_color">#001C30</color>
     <color name="grey_medium">#9AA3B2</color>
+    <color name="app_background_color">#F1F1F1</color>
+    <color name="home_filter_button_color">#404040</color>
 </resources>

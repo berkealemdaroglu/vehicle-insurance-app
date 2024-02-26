@@ -9,24 +9,34 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.adapter.HomeFragmentLowPriceVehicleAdapter
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.showToastMessage
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment :
-    BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(FragmentHomeBinding::inflate) {
     override val viewModel: HomeFragmentViewModel by activityViewModels()
 
+    private lateinit var homeFragmentLowPriceVehicleAdapter: HomeFragmentLowPriceVehicleAdapter
+
     override fun initUI(view: View) {
+
+        //Todo : buttonlar customview a taşınacak. seymenle dark mode hakkında konuş.
+        /**
+         * core servisimiz olan insurancevehiclelist verisini her istekte çekmeyeceğiz sanırım parametrik yapabiliriz bunun için ek servis açarız paramlist tarzı.
+         * Eğer error gelirse popup açar tekrar core isteği attırabiliriz. belli bir denemeden sonra lütfen daha sonra tekrar deneyin popup ı açarız.
+         * yada önceki veriyi local e yazarsak belli bir denemeden sonra ordan da devam edebiliriz.
+         *
+         */
+
         insureButtonHandle()
         selectedVehicleState()
         getLowPriceVehicles()
-        errorHandling()
     }
 
     private fun insureButtonHandle() {
@@ -46,20 +56,25 @@ class HomeFragment :
             }
 
             modelButton.setOnClickListener {
-                viewModel.vehicleInsuranceMapper.filterByYearAndBrand(
-                    viewModel.getYear,
-                    viewModel.getBrand
-                ) { response ->
+                viewModel.vehicleInsuranceMapper.filterByYearAndBrand(viewModel.getYear, viewModel.getBrand) { response ->
                     viewModel.setSelectedFilter(brandList = response)
                     openVehicleFilterBottomSheet(SelectedVehicleFilterItem.SELECTED_MODEL)
                 }
             }
         }
+
+        // 400K altı araçların dosya olarak yazılmasını sağlayan kod. Daha sonra silinecek.
+        /* viewModel.vehicleInsuranceMapper.filterByLowQualityVehicle { lowPriceString ->
+             context?.openFileOutput("LowPriceList.txt", Context.MODE_PRIVATE).use {
+                 it?.write(lowPriceString.toByteArray())
+             }
+         }*/
+
     }
 
     private fun selectedVehicleState() {
-        lifecycleScope.launch {
-            viewModel.selectedVehicle.collectLatest { brand ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectedVehicle.collectWhenStarted(viewLifecycleOwner) { brand ->
                 if (brand != null) {
                     binding?.apply {
                         when (brand.isSelectedVehicle) {
@@ -92,7 +107,6 @@ class HomeFragment :
             modelButton.text = MODEL_BUTTON_TEXT
             modelButton.isEnabled = false
             insuranceVehicleLayout.collapse()
-            // açık olan kasko bedel layoutu kapat
         }
     }
 
@@ -103,18 +117,20 @@ class HomeFragment :
             modelButton.text = MODEL_BUTTON_TEXT
             modelButton.isEnabled = true
             insuranceVehicleLayout.collapse()
-            // açık olan kasko bedel layoutu kapat
         }
     }
 
     private fun selectModelButtonUI(brand: Brand) {
         binding?.apply {
-            // motionlayout ile kasko layoutunu visible değilse yap.
-            val vehicleTitleStr =
-                brand.brandName + " " + brand.vehicleModels?.firstOrNull()?.modelName
+            val vehicleTitleStr = brand.brandName + " " + brand.vehicleModels?.firstOrNull()?.modelName
             vehicleTitle.text = vehicleTitleStr
-            vehiclePrice.text = brand.vehicleModels?.firstOrNull()?.price.toString()
+            yearButton.text = brand.years
+            yearButton.isEnabled = true
+            brandButton.text = brand.brandName
+            brandButton.isEnabled = true
+            vehiclePrice.text = "Kasko Değeri: " + brand.vehicleModels?.firstOrNull()?.price.toString().formatPriceWithDotsForDecimal() + " ₺"
             modelButton.text = brand.vehicleModels?.firstOrNull()?.modelName
+            modelButton.isEnabled = true
 
             if (!insuranceVehicleLayout.isVisible) insuranceVehicleLayout.expand()
 
@@ -129,41 +145,34 @@ class HomeFragment :
             )
 
             binding?.creditCalculatorButton?.setOnClickListener {
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToCreditCalculatorFragment(carInfo)
+                val action = HomeFragmentDirections.actionHomeFragmentToCreditCalculatorFragment(carInfo)
                 findNavController().navigate(action)
             }
         }
     }
 
     private fun getLowPriceVehicles() {
+        homeFragmentLowPriceVehicleAdapter = HomeFragmentLowPriceVehicleAdapter()
+        binding?.lowPriceVehicleRV?.adapter = homeFragmentLowPriceVehicleAdapter
+
         lifecycleScope.launch {
-            viewModel.lowPriceVehicles.collectLatest {
+            viewModel.lowPriceVehicles.collectWhenStarted(viewLifecycleOwner) {
                 if (it != null) {
-                    openCarSearhFragment(it)
+                    homeFragmentLowPriceVehicleAdapter.setCarDataModel(it)
+                    openCarSearchFragment(it)
                 }
             }
         }
     }
 
-    private fun openCarSearhFragment(carDataResponseModel: CarDataResponseModel) {
-        binding?.btnGoSearchFragment?.setOnClickListener {
+    private fun openCarSearchFragment(carDataResponseModel: CarDataResponseModel) {
+        binding?.lowPriceVehicleBtnGoSearch?.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToVehicleSearchListFragment(
                 carDataResponseModel
             )
             findNavController().navigate(action)
         }
 
-    }
-
-    private fun errorHandling() {
-        lifecycleScope.launch {
-            viewModel.errorMessage.collectLatest { errorMessage ->
-                if (errorMessage != null) {
-                    context?.showToastMessage(errorMessage)
-                }
-            }
-        }
     }
 
     companion object {

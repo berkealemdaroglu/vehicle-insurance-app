@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="home_filter_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_16dp</item>
+        <item name="android:background">@drawable/stroke_home_button_filter_background</item>
+        <item name="android:drawableEnd">@drawable/ic_right_arrow</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:gravity">start|center</item>
+        <item name="android:paddingStart">@dimen/margin_24dp</item>
+        <item name="android:paddingEnd">@dimen/margin_16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/home_filter_button_color</item>
+        <item name="android:textSize">@dimen/font_number_14sp</item>
+    </style>
 
+    <style name="home_result_textview_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/toolbar_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_16dp</item>
+    </style>
 
 </resources>

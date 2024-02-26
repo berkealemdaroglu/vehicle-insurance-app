@@ -8,6 +8,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentSplashBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragmentViewModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,6 +24,19 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, HomeFragmentViewModel
             viewModel.splashLoading.collectLatest {
                 if (it == true) {
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                }
+            }
+        }
+
+        errorHandling()
+    }
+
+    //Todo : popup çıkarılabilir.
+    private fun errorHandling() {
+        lifecycleScope.launch {
+            viewModel.errorMessage.collectLatest { errorMessage ->
+                if (errorMessage != null) {
+                    context?.showToastMessage(errorMessage)
                 }
             }
         }

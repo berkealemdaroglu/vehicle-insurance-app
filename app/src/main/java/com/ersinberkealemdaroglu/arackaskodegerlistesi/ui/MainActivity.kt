@@ -2,8 +2,9 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ActivityMainBinding
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,5 +37,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun hideToolbar() {
+        binding.toolbar.gone()
+    }
+
+    fun showToolbar() {
+        binding.toolbar.visible()
     }
 }

@@ -27,6 +27,7 @@ abstract class BaseViewModel : ViewModel() {
         onSuccess: suspend (T) -> Unit,
         onError: suspend ((String) -> Unit),
         onLoading: () -> Unit = { activateLoadingState() },
+        isAutoLoading: Boolean? = null,
         coroutineDispatcher: CoroutineDispatcher = Dispatchers.Main
     ) {
         withContext(context = coroutineDispatcher) {
@@ -42,7 +43,9 @@ abstract class BaseViewModel : ViewModel() {
                         onError(result.error)
                     }
 
-                    is NetworkResult.Loading -> onLoading()
+                    is NetworkResult.Loading -> {
+                        if (isAutoLoading == true) onLoading()
+                    }
                 }
             }
         }

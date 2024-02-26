@@ -13,14 +13,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
-    private val insureUseCase: InsureUseCase,
-    @DiModule.DispatcherIO private val dispatcherIO: CoroutineDispatcher,
+    private val insureUseCase: InsureUseCase, @DiModule.DispatcherIO private val dispatcherIO: CoroutineDispatcher
 ) : BaseViewModel() {
 
     lateinit var vehicleInsuranceMapper: VehicleInsuranceMapper
@@ -46,32 +43,29 @@ class HomeFragmentViewModel @Inject constructor(
     private val _lowPriceVehicles = MutableStateFlow<CarDataResponseModel?>(null)
     val lowPriceVehicles: StateFlow<CarDataResponseModel?> = _lowPriceVehicles
 
-    private val mutex = Mutex()
-
     init {
+        getInsuranceVehicleData()
+    }
+
+    private fun getInsuranceVehicleData() {
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.getVehicleInsurance().collectNetworkResult(onSuccess = { data ->
-                _splashLoading.emit(true)
                 vehicleInsuranceMapper = VehicleInsuranceMapper(data)
-                getLowPriceWehicle()
+                getLowPriceVehicle()
             }, onError = { errorMessage ->
-                _splashLoading.emit(false)
                 _errorMessage.emit(errorMessage)
-            })
+            }, isAutoLoading = false)
         }
     }
 
-    private fun getLowPriceWehicle() {
+    private fun getLowPriceVehicle() {
         viewModelScope.launch(dispatcherIO) {
-            mutex.withLock {
-                insureUseCase.getLowVehicles().collectNetworkResult(
-                    onSuccess = { data ->
-                        _lowPriceVehicles.emit(data)
-                    }, onError = {
-                        _splashLoading.emit(false)
-                        _errorMessage.emit(it)
-                    })
-            }
+            insureUseCase.getLowVehicles().collectNetworkResult(onSuccess = { data ->
+                _lowPriceVehicles.emit(data)
+                _splashLoading.emit(true)
+            }, onError = {
+                _errorMessage.emit(it)
+            }, isAutoLoading = false)
         }
     }
 
