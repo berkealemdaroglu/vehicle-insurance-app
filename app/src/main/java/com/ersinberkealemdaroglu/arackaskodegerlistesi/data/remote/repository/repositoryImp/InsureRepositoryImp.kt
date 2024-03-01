@@ -16,4 +16,8 @@ class InsureRepositoryImp @Inject constructor(private val insureDataSource: Insu
         insureDataSource.getLowVehicles()
     }
 
+    override fun checkUpdate() = runRepositorySafe {
+        insureDataSource.checkUpdate()
+    }
+
 }

@@ -5,6 +5,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+
 }
 
 android {
@@ -95,6 +96,9 @@ dependencies {
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
+
+    //DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     //Meterial Design 3
   // implementation 'androidx.compose.material3:material3:1.9.0'

@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.service
 
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.CheckUpdateResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import retrofit2.Response
@@ -12,4 +13,7 @@ interface InsureService {
 
     @GET("car/low_price_vehicle.json")
     suspend fun getLowVehicles(): Response<CarDataResponseModel>
+
+    @GET("car/check_update.json")
+    suspend fun checkUpdate(): Response<CheckUpdateResponseModel>
 }
