@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="@dimen/font_text_24sp"
         tools:text="Başlık" />
 
     <TextView
@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:textSize="@dimen/font_number_14sp"
         tools:text="Bu burada bir mesajdır. Lütfen bir seçim yapınız." />
 
     <LinearLayout
@@ -28,20 +29,25 @@
         android:layout_gravity="end"
         android:orientation="horizontal">
 
-        <Button
+        <TextView
             android:id="@+id/negativeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Hayır" />
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:textStyle="bold"
+            android:padding="@dimen/margin_8dp"
+            android:textSize="@dimen/font_text_16sp"
+            android:textColor="@color/toolbar_text_color"
+            tools:text="Hayır" />
 
-        <Button
+        <TextView
             android:id="@+id/positiveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Evet" />
-
+            android:textStyle="bold"
+            android:textSize="@dimen/font_number_14sp"
+            android:padding="@dimen/margin_8dp"
+            android:textColor="@color/toolbar_text_color"
+            tools:text="Evet" />
     </LinearLayout>
-
-
 </LinearLayout>
