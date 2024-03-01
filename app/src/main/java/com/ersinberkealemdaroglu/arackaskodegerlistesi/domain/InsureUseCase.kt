@@ -1,5 +1,6 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.domain
 
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.CheckUpdateResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.InsureRepository
@@ -12,5 +13,7 @@ class InsureUseCase @Inject constructor(private val insureRepository: InsureRepo
     fun getVehicleInsurance(): Flow<NetworkResult<VehicleInsuranceResponse>> = insureRepository.getVehicleInsurance()
 
     fun getLowVehicles(): Flow<NetworkResult<CarDataResponseModel>> = insureRepository.getLowVehicles()
+
+    fun checkUpdate(): Flow<NetworkResult<CheckUpdateResponseModel>> = insureRepository.checkUpdate()
 
 }

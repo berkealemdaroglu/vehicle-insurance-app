@@ -10,6 +10,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.datastore.DataStoreManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.adapter.HomeFragmentLowPriceVehicleAdapter
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
@@ -17,14 +18,18 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(FragmentHomeBinding::inflate) {
-    override val viewModel: HomeFragmentViewModel by activityViewModels()
+class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(FragmentHomeBinding::inflate) {
+
+    override val viewModel: SharedViewModel by activityViewModels()
 
     private lateinit var homeFragmentLowPriceVehicleAdapter: HomeFragmentLowPriceVehicleAdapter
+
+    private val dataStoreManager = DataStoreManager()
 
     override fun initUI(view: View) {
 
@@ -39,6 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
         selectedVehicleState()
         getLowPriceVehicles()
         openCreditCalculatorFragment()
+
     }
 
     private fun insureButtonHandle() {
@@ -64,18 +70,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
                 }
             }
         }
-
-        // 400K altı araçların dosya olarak yazılmasını sağlayan kod. Daha sonra silinecek.
-        /* viewModel.vehicleInsuranceMapper.filterByLowQualityVehicle { lowPriceString ->
-             context?.openFileOutput("LowPriceList.txt", Context.MODE_PRIVATE).use {
-                 it?.write(lowPriceString.toByteArray())
-             }
-         }*/
-
     }
 
     private fun selectedVehicleState() {
         viewLifecycleOwner.lifecycleScope.launch {
+
             viewModel.selectedVehicle.collectWhenStarted(viewLifecycleOwner) { brand ->
                 if (brand != null) {
                     binding?.apply {
@@ -159,12 +158,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(Fr
         binding?.lowPriceVehicleRV?.adapter = homeFragmentLowPriceVehicleAdapter
 
         lifecycleScope.launch {
-            viewModel.lowPriceVehicles.collectWhenStarted(viewLifecycleOwner) {
-                if (it != null) {
-                    homeFragmentLowPriceVehicleAdapter.setCarDataModel(it)
-                    openCarSearchFragment(it)
-                }
+            val lowVehicleData = dataStoreManager.readLowPriceVehicleData()
+            if (lowVehicleData.isNotEmpty()) {
+                val gson = Gson()
+                val vehicleData = gson.fromJson(lowVehicleData, CarDataResponseModel::class.java)
+                homeFragmentLowPriceVehicleAdapter.setCarDataModel(vehicleData)
+                openCarSearchFragment(vehicleData)
             }
+
         }
     }
 

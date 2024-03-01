@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.CustomToolbarBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.invisible
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
 
 class CustomToolbar @JvmOverloads constructor(
@@ -30,7 +31,6 @@ class CustomToolbar @JvmOverloads constructor(
                 leftIcon.gone()
             }
         }
-
     }
 
     fun setRightIcon(resourceId: Int?) {
@@ -39,7 +39,7 @@ class CustomToolbar @JvmOverloads constructor(
                 rightIcon.visible()
                 rightIcon.setImageResource(it)
             } ?: run {
-                rightIcon.gone()
+                rightIcon.invisible()
             }
         }
     }
