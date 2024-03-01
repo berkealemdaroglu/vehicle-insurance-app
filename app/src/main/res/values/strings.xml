@@ -13,4 +13,14 @@
     <string name="marka">Marka</string>
     <string name="model">Model</string>
     <string name="kasko_degeri">Kasko Değeri: </string>
+    <string name="secili_arac">Seçili Araç:</string>
+    <string name="hyundai_i20_2014_cvvt_go">Hyundai i20 2014 CVVT-GO...</string>
+    <string name="arac_kasko_degeri">Araç Kasko Değeri:</string>
+    <string name="kredi_tutar">Kredi Tutarı</string>
+    <string name="vade_oran">Faiz Oranı</string>
+    <string name="vade_suresi">Vade</string>
+    <string name="toplam_borc">Toplam Borç</string>
+    <string name="aylik_taksit_tutari">Aylık Taksit Tutarı</string>
+    <string name="maksimum_kredi_tutar">Maksimum Kredi Tutarı:</string>
+    <string name="maksimum_vade">Maksimum Vade :</string>
 </resources>

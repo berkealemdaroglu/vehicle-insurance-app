@@ -134,8 +134,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_home_fragment_cars" />
 
-        <include layout="@layout/item_credit_calculator_info_layout" />
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

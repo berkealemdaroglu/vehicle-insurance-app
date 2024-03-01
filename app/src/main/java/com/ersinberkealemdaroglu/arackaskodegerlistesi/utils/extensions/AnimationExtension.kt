@@ -6,10 +6,9 @@ import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewGroup
 
-fun View.expand(duration: Long = 300) {
+fun View.expand(duration: Long = 300, heightOffset: Int? = null) {
     measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-    val targetHeight = measuredHeight
-
+    val targetHeight = if (heightOffset != null) measuredHeight - heightOffset else measuredHeight
     layoutParams.height = 0
     visibility = View.VISIBLE
 
