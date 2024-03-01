@@ -32,6 +32,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
     private var activeProgressCount = 0
     private var insureProgressDialog: InsureProgressDialog? = null
 
+    private val activityBinding by lazy {
+        (activity as? MainActivity)
+    }
+
     protected abstract fun initUI(view: View)
     protected open fun createInitUI() {}
     protected open fun createPresenter() {}
@@ -67,7 +71,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
     }
 
     private fun setToolbarStateForFragments(fragment: Fragment) {
-        val activityBinding = (activity as? MainActivity)
         when (fragment) {
             is SplashFragment -> {
                 activityBinding?.hideToolbar()
@@ -78,7 +81,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                 activityBinding?.setToolbar(
                     leftIconDrawable = R.drawable.ic_insure_app_logo,
                     title = getString(R.string.arac_kasko_deger_listesi),
-                    rightIconDrawable = R.drawable.ic_favorite,
                 )
             }
 
@@ -88,7 +90,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                     leftIconDrawable = R.drawable.btn_back,
                     leftButtonClickListener = { findNavController().navigateUp() },
                     title = getString(R.string.arac_detay),
-                    rightIconDrawable = R.drawable.ic_favorite,
                 )
             }
 
@@ -112,7 +113,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 

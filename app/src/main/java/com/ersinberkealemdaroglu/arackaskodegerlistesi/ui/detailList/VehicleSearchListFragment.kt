@@ -25,7 +25,6 @@ class VehicleSearchListFragment :
         setRecyclerView(cars)
         setSearchView()
         openCreditCalculatorFragment()
-        //deneme
     }
 
     private fun setRecyclerView(carModel: CarDataResponseModel) {

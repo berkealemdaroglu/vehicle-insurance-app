@@ -8,6 +8,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.C
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.BottomSheetFilterBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemFilterBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseBottomSheet
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
 
 class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomSheet<BottomSheetFilterBinding>(BottomSheetFilterBinding::inflate) {
 
@@ -21,6 +22,7 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomS
     override fun initUI(view: View) {
         val filterList = arrayListOf(
             "Fiyata Göre (Önce en yüksek)", "Fiyata Göre (Önce en düşük)", "Yıla göre (Önce en yeni araçlar)", "Yıla göre (Önce en eski araçlar)"
+
         )
 
         filterList.forEachIndexed { index, filter ->
@@ -35,10 +37,13 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomS
                 itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_passive)
             }
 
-            // Tıklama dinleyicisi
+            if (index == 3) {
+                itemBinding.divider.gone()
+            }
+
             itemBinding.root.setOnClickListener {
-                selectedFilterIndex = index // Seçili filtre indeksini güncelle
-                updateIcons() // İkonları güncelle
+                selectedFilterIndex = index
+                updateIcons()
             }
 
             binding?.linearLayout?.addView(itemBinding.root)

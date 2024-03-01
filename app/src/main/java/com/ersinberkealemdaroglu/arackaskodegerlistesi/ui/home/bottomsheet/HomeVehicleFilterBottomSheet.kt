@@ -5,14 +5,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeVehicleFilterBottomSheetBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseBottomSheet
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragmentViewModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.SharedViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeVehicleFilterBottomSheet(private val selectedVehicleFilterItem: SelectedVehicleFilterItem) :
     BaseBottomSheet<FragmentHomeVehicleFilterBottomSheetBinding>(FragmentHomeVehicleFilterBottomSheetBinding::inflate) {
 
-    private val viewModel: HomeFragmentViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
     private lateinit var adapter: HomeVehicleFilterAdapter
 
     override fun initUI(view: View) {
