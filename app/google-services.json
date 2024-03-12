@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226160489206",
+    "project_id": "arackaskodegerlistesi",
+    "storage_bucket": "arackaskodegerlistesi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226160489206:android:ae614ea2c5de59f01c32d7",
+        "android_client_info": {
+          "package_name": "com.ersinberkealemdaroglu.arackaskodegerlistesi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoYvZOt64m9w5VIu0n4GScGMO5UvcCNVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

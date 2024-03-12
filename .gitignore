@@ -61,3 +61,4 @@ outTmp/
 /kotlin-native/dist
 kotlin-ide/
 .kotlin/
+google-services.json

@@ -33,9 +33,11 @@ class DataStoreManager {
 
     suspend fun storeLowPriceVehicleData(
         lowPriceVehicleData: String,
+        onSuccessListener: suspend () -> Unit
     ) {
         vehicleDatastore.edit { preferences ->
             preferences[LOW_PRICE_VEHICLE_DATA] = lowPriceVehicleData
+            onSuccessListener()
         }
     }
 

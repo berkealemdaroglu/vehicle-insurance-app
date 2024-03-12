@@ -1,6 +1,7 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.di
 
 import android.content.Context
+import com.airbnb.lottie.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.service.InsureService
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.BASE_URL
@@ -47,8 +48,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext appContext: Context, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(ChuckerInterceptor.Builder(context = appContext).build()).build()
+        val builder = OkHttpClient.Builder().addInterceptor(loggingInterceptor).readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(ChuckerInterceptor.Builder(context = appContext).build())
+        }
+        return builder.build()
     }
-
 }

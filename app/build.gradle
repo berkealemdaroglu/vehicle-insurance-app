@@ -5,7 +5,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
-
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -31,6 +31,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -90,9 +91,7 @@ dependencies {
 
     // Chucker
     debugImplementation 'com.github.chuckerteam.chucker:library:4.0.0'
-
-    // Memory Leaks
-    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
+    releaseImplementation 'com.github.chuckerteam.chucker:library-no-op:4.0.0'
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
@@ -101,7 +100,8 @@ dependencies {
     //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    //Meterial Design 3
-  // implementation 'androidx.compose.material3:material3:1.9.0'
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.7.4')
+    implementation 'com.google.firebase:firebase-analytics'
 
 }

@@ -52,14 +52,9 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun checkIsNeedDataRequest() {
-
         viewModelScope.launch {
-            checkUpdate()
             val isNeedDataRequest = dataStoreManager.readIsNeedDataRequest()
-
-            if (isNeedDataRequest) {
-                callRequests()
-            }
+            checkUpdate(isNeedDataRequest)
         }
     }
 
@@ -68,13 +63,15 @@ class SharedViewModel @Inject constructor(
         getLowPriceVehicle()
     }
 
-    private fun checkUpdate() {
+    private fun checkUpdate(isFirstOpen: Boolean) {
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
                 data.isUpdateNecessary?.let { updateNecessary ->
                     if (updateNecessary) {
                         dataStoreManager.clearDataStore()
                         dataStoreManager.updateIsNeedDataRequest(true)
+                        callRequests()
+                    } else if (isFirstOpen) {
                         callRequests()
                     } else {
                         _splashLoading.emit(true)
@@ -110,12 +107,12 @@ class SharedViewModel @Inject constructor(
     private fun getLowPriceVehicle() {
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.getLowVehicles().collectNetworkResult(onSuccess = { data ->
-                dataStoreManager.storeLowPriceVehicleData(gson.toJson(data))
-                _splashLoading.emit(true)
+                dataStoreManager.storeLowPriceVehicleData(gson.toJson(data)) {
+                    _splashLoading.emit(true)
+                }
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
                 dataStoreManager.updateIsNeedDataRequest(true)
-
             }, isAutoLoading = false)
         }
     }
