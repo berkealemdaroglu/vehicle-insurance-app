@@ -18,6 +18,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.vehicleLoanAmountCalculator
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,19 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
     private val dataStoreManager = DataStoreManager()
 
     override fun initUI(view: View) {
-
-        /**
-         * core servisimiz olan insurancevehiclelist verisini her istekte çekmeyeceğiz sanırım parametrik yapabiliriz bunun için ek servis açarız paramlist tarzı.
-         * Eğer error gelirse popup açar tekrar core isteği attırabiliriz. belli bir denemeden sonra lütfen daha sonra tekrar deneyin popup ı açarız.
-         * yada önceki veriyi local e yazarsak belli bir denemeden sonra ordan da devam edebiliriz.
-         *
-         */
-
         insureButtonHandle()
         selectedVehicleState()
         getLowPriceVehicles()
         openCreditCalculatorFragment()
-
     }
 
     private fun insureButtonHandle() {
@@ -142,8 +134,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
                 vehicleYear = viewModel.getYear,
                 vehicleBrand = brand.brandName,
                 vehicleModel = brand.vehicleModels?.firstOrNull()?.modelName,
-                // burası ersinle konuşulacak
-                //  vehicleLoanAmount = brand.vehicleModels?.firstOrNull()?.loanAmount.toString(),
+                vehicleMaxCreditExpiry = brand.vehicleModels?.firstOrNull()?.price?.vehicleLoanAmountCalculator(requireContext())?.vehicleMaxCreditExpiry,
+                vehicleLoanAmount = brand.vehicleModels?.firstOrNull()?.price?.vehicleLoanAmountCalculator(requireContext())?.vehicleLoanAmount?.toInt(),
+                isLoanAvailable = brand.vehicleModels?.firstOrNull()?.price?.vehicleLoanAmountCalculator(requireContext())?.isLoanAvailable ?: false
             )
 
             binding?.creditCalculatorButton?.setOnClickListener {

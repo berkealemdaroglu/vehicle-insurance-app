@@ -10,5 +10,7 @@
     <color name="app_background_color">#F1F1F1</color>
     <color name="home_filter_button_color">#404040</color>
     <color name="line_color">#DADDE0</color>
+    <color name="credit_card_view_bg_color">#e5e7e9</color>
     <color name="credit_calculator_info_title_color">#687182</color>
+    <color name="credit_calculator_title_color">#8AA3B1</color>
 </resources>

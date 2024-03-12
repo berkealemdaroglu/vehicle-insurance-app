@@ -11,18 +11,19 @@
         android:id="@+id/view"
         android:layout_width="100dp"
         android:layout_height="4dp"
-        android:layout_marginTop="@dimen/margin_8dp"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:background="@drawable/view_background"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filterRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="@dimen/margin_4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/vehicle_filter_item" />
 

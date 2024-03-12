@@ -2,6 +2,7 @@
     <string name="app_name">Araç Kasko Değer Listesi</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kredi_hesapla">Kredi Hesapla</string>
+    <string name="yine_de_hesapla">Yine de hesapla</string>
     <string name="arac_kasko_deger_listesi">Araç Kasko Değer Listesi</string>
     <string name="arac_detay">Araç Detay</string>
     <string name="marka_model_ve_yil_ile_arama_yapabilirsiz">Marka, model ve yıl ile arama yapabilirsiz...</string>
@@ -13,4 +14,25 @@
     <string name="marka">Marka</string>
     <string name="model">Model</string>
     <string name="kasko_degeri">Kasko Değeri: </string>
+    <string name="secili_arac">Seçili Araç:</string>
+    <string name="hyundai_i20_2014_cvvt_go">Hyundai i20 2014 CVVT-GO...</string>
+    <string name="arac_kasko_degeri">Araç Kasko Değeri:</string>
+    <string name="kredi_tutar">Kredi Tutarı</string>
+    <string name="vade_oran">Faiz Oranı</string>
+    <string name="vade_suresi">Vade</string>
+    <string name="toplam_borc">Toplam Borç</string>
+    <string name="aylik_taksit_tutari">Aylık Taksit Tutarı</string>
+    <string name="maksimum_kredi_tutar">Maksimum Kredi Tutarı:</string>
+    <string name="maksimum_vade">Maksimum Vade :</string>
+    <string name="low_price_text">400 Bin TL Araçlar</string>
+    <string name="kredi_detay_info_text">Detaylı bilgi için lütfen bankanızla görüşünüz.</string>
+    <string name="kirk_sekiz_ay">48 Ay</string>
+    <string name="otuz_alti_ay">36 Ay</string>
+    <string name="yirmi_dort_ay">24 Ay</string>
+    <string name="on_iki_ay">12 Ay</string>
+    <string name="sifir_ay">0 Ay</string>
+    <string name="sifir_tl">0</string>
+    <string name="kredi_cikmaz">Kredi Çekilemez!</string>
+    <string name="kredi_olanagi_yok">Üzgünüz, aracın kasko değeri 2.000.000 TL\'yi aştığı için kredi olanağı sunulamamaktadır.</string>
+    <string name="ayl_k_taksit_tutar_ve_toplam_bor_oranlar_tamamen_tahmini_olup_kesin_bilgileri_bankan_zdan_renebilirsiniz">Aylık Taksit Tutarı ve Toplam Borç oranları tamamen tahmini olup, kesin bilgileri bankanızdan öğrenebilirsiniz.</string>
 </resources>

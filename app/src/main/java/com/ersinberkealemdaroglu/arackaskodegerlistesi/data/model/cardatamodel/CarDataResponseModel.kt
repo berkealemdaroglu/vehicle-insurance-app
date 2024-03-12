@@ -15,17 +15,20 @@ data class CarDataResponseModelItem(
     @SerializedName("vehicle_hp")
     val vehicleHp: String? = null,
     @SerializedName("vehicle_loan_amount")
-    val vehicleLoanAmount: String? = null,
+    val vehicleLoanAmount: Int? = null,
     @SerializedName("vehicle_model")
     val vehicleModel: String? = null,
     @SerializedName("vehicle_price")
     val vehiclePrice: String? = null,
+    @SerializedName("vehicle_max_credit_expiry")
+    val vehicleMaxCreditExpiry: String? = null,
     @SerializedName("vehicle_title")
     val vehicleTitle: String? = null,
     @SerializedName("vehicle_year")
     val vehicleYear: String? = null,
     @SerializedName("vehicle_images")
-    val vehicleImages: List<VehicleImage>? = null
+    val vehicleImages: List<VehicleImage>? = null,
+    val isLoanAvailable: Boolean = true
 ) : Parcelable {
     @Parcelize
     data class VehicleImage(

@@ -58,6 +58,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.datastore:datastore-preferences-core:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
@@ -91,7 +92,7 @@ dependencies {
     debugImplementation 'com.github.chuckerteam.chucker:library:4.0.0'
 
     // Memory Leaks
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")

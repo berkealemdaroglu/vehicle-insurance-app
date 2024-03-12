@@ -39,10 +39,9 @@ class DataStoreManager {
         }
     }
 
-    suspend fun readIsNeedDataRequest(): Boolean =
-        vehicleDatastore.data.map { preferences ->
-            preferences[IS_FIRST_OPEN] ?: true
-        }.first()
+    suspend fun readIsNeedDataRequest(): Boolean = vehicleDatastore.data.map { preferences ->
+        preferences[IS_FIRST_OPEN] ?: true
+    }.first()
 
     suspend fun updateIsNeedDataRequest(value: Boolean) {
         vehicleDatastore.edit { settings ->
@@ -50,14 +49,18 @@ class DataStoreManager {
         }
     }
 
-    suspend fun readLowPriceVehicleData(): String =
-        vehicleDatastore.data.map { preferences ->
-            preferences[LOW_PRICE_VEHICLE_DATA] ?: ""
-        }.first()
+    suspend fun readLowPriceVehicleData(): String = vehicleDatastore.data.map { preferences ->
+        preferences[LOW_PRICE_VEHICLE_DATA] ?: ""
+    }.first()
 
-    suspend fun readVehicleData(): String =
-        vehicleDatastore.data.map { preferences ->
-            preferences[VEHICLE_DATA] ?: ""
-        }.first()
+    suspend fun readVehicleData(): String = vehicleDatastore.data.map { preferences ->
+        preferences[VEHICLE_DATA] ?: ""
+    }.first()
+
+    suspend fun clearDataStore() {
+        vehicleDatastore.edit {
+            it.clear()
+        }
+    }
 
 }

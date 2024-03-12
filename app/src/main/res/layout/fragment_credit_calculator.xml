@@ -1,13 +1,512 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.creditcalculator.CreditCalculatorFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/app_background_color">
 
-</FrameLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/secondary_color"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/expandLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_12dp"
+                        android:layout_marginStart="@dimen/margin_12dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:text="@string/secili_arac"
+                        android:textColor="@color/toolbar_text_color"
+                        android:textSize="@dimen/font_text_14sp" />
+
+                    <TextView
+                        android:id="@+id/selectedVehicleText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_12dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="@dimen/font_text_14sp"
+                        tools:text="@string/hyundai_i20_2014_cvvt_go" />
+
+                    <ImageView
+                        android:id="@+id/expandIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_right_arrow"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/collapseLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/secondary_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_12dp"
+                        android:layout_marginVertical="@dimen/margin_8dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="@string/arac_kasko_degeri"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp" />
+
+                        <TextView
+                            android:id="@+id/vehicleInsurancePrice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:gravity="end"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp"
+                            tools:text="378.000 TL" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:background="@color/line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_12dp"
+                        android:layout_marginVertical="@dimen/margin_8dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="@string/maksimum_kredi_tutar"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp" />
+
+                        <TextView
+                            android:id="@+id/maxCreditAmount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:gravity="end"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp"
+                            tools:text="178.000 TL" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:background="@color/line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_12dp"
+                        android:layout_marginVertical="@dimen/margin_8dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="@string/maksimum_vade"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp" />
+
+                        <TextView
+                            android:id="@+id/maxCreditExpiry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:gravity="end"
+                            android:textColor="@color/toolbar_text_color"
+                            android:textSize="@dimen/font_text_12sp"
+                            tools:text="48 Ay" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/infoCreditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:drawablePadding="@dimen/margin_8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/kredi_olanagi_yok"
+            android:textColor="@color/secondary_color"
+            android:textSize="@dimen/font_text_12sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_info_icon"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/creditCalculatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/margin_12dp"
+            android:background="@drawable/stroke_home_credit_button_background"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_32dp"
+            android:text="@string/yine_de_hesapla"
+            android:textAllCaps="false"
+            android:textColor="@color/single_white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infoCreditTextView" />
+
+        <TextView
+            android:id="@+id/creditAmountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/kredi_tutar"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creditCalculatorButton" />
+
+        <EditText
+            android:id="@+id/creditAmountEditText"
+            android:layout_width="170dp"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/stroke_home_button_filter_background"
+            android:drawableEnd="@drawable/ic_tl_icon"
+            android:drawablePadding="@dimen/margin_8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:foregroundGravity="center"
+            android:gravity="end|center"
+            android:hint="@string/kredi_tutar"
+            android:inputType="number"
+            android:paddingStart="@dimen/margin_16dp"
+            android:paddingEnd="@dimen/margin_8dp"
+            android:textColor="@color/secondary_color"
+            android:textDirection="ltr"
+            android:textSize="@dimen/font_text_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/creditAmountText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/creditAmountText"
+            app:layout_constraintTop_toTopOf="@+id/creditAmountText" />
+
+        <SeekBar
+            android:id="@+id/creditAmountSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:progressBackgroundTint="@color/secondary_color"
+            android:thumb="@drawable/custom_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creditAmountEditText" />
+
+        <TextView
+            android:id="@+id/expireDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/vade_suresi"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creditAmountSeekBar" />
+
+        <EditText
+            android:id="@+id/expireEdittext"
+            android:layout_width="170dp"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/stroke_home_button_filter_background"
+            android:drawableEnd="@drawable/ic_ay_icon"
+            android:drawablePadding="@dimen/margin_8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="end|center"
+            android:hint="@string/vade_suresi"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingStart="@dimen/margin_16dp"
+            android:paddingEnd="@dimen/margin_8dp"
+            android:textColor="@color/secondary_color"
+            android:textDirection="ltr"
+            android:textSize="@dimen/font_text_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/expireDateTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/expireDateTextView"
+            app:layout_constraintTop_toTopOf="@+id/expireDateTextView" />
+
+        <SeekBar
+            android:id="@+id/expireDateSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:progressBackgroundTint="@color/secondary_color"
+            android:thumb="@drawable/custom_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expireEdittext" />
+
+        <TextView
+            android:id="@+id/percentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/vade_oran"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expireDateSeekBar" />
+
+        <EditText
+            android:id="@+id/interestPercentEdittext"
+            android:layout_width="170dp"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/stroke_home_button_filter_background"
+            android:drawableStart="@drawable/ic_percent_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:foregroundGravity="center"
+            android:gravity="end|center"
+            android:hint="@string/vade_oran"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingStart="55dp"
+            android:paddingEnd="@dimen/margin_16dp"
+            android:textColor="@color/secondary_color"
+            android:textDirection="ltr"
+            android:textSize="@dimen/font_text_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/percentTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/percentTextView"
+            app:layout_constraintTop_toTopOf="@+id/percentTextView" />
+
+        <TextView
+            android:id="@+id/infoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_24dp"
+            android:drawablePadding="@dimen/margin_8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/ayl_k_taksit_tutar_ve_toplam_bor_oranlar_tamamen_tahmini_olup_kesin_bilgileri_bankan_zdan_renebilirsiniz"
+            android:textColor="@color/secondary_color"
+            android:textSize="@dimen/font_text_12sp"
+            app:drawableStartCompat="@drawable/ic_info_icon"
+            app:layout_constraintTop_toBottomOf="@+id/interestPercentEdittext"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/creditResultCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:cardBackgroundColor="@color/credit_card_view_bg_color"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infoTextView"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/purchasePriceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/aylik_taksit_tutari"
+                    android:textColor="@color/credit_calculator_title_color"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/centerLine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/purchasePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/toolbar_text_color"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/purchasePriceText"
+                    app:layout_constraintStart_toStartOf="@+id/purchasePriceText"
+                    app:layout_constraintTop_toBottomOf="@+id/purchasePriceText"
+                    tools:text="22.897,56 TL" />
+
+                <View
+                    android:id="@+id/centerLine"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="@dimen/margin_16dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintBottom_toTopOf="@+id/verticalLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/totalPurchasePriceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/toplam_borc"
+                    android:textColor="@color/credit_calculator_title_color"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/centerLine"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/totalPurchasePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/toolbar_text_color"
+                    android:textSize="@dimen/font_text_14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/totalPurchasePriceText"
+                    app:layout_constraintStart_toStartOf="@+id/totalPurchasePriceText"
+                    app:layout_constraintTop_toBottomOf="@+id/totalPurchasePriceText"
+                    tools:text="2.200.897,56 TL" />
+
+                <View
+                    android:id="@+id/verticalLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/purchasePrice" />
+
+                <TextView
+                    android:id="@+id/yearlyInterestRateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/kredi_detay_info_text"
+                    android:textColor="@color/credit_calculator_title_color"
+                    android:textSize="@dimen/font_text_12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/creditResultCardView">
+
+            <include layout="@layout/item_credit_calculator_info_layout" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
