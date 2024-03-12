@@ -26,12 +26,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SharedViewModel>(Frag
     private lateinit var customDialogFragment: CustomDialogFragment
 
     override fun initUI(view: View) {
-        //checkUpdate()
-
         lifecycleScope.launch {
             viewModel.splashLoading.collectLatest {
                 if (it == true) {
-
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 }
             }

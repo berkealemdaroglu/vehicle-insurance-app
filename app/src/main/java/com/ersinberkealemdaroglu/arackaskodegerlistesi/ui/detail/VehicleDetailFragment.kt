@@ -8,6 +8,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentVehicleDetailBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemFeaturesDetailPageBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.invisible
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,6 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
     private val carData by lazy { navArgs.lowPriceCar }
 
     override fun initUI(view: View) {
-        //Test edilecek
         setupUI()
         vehicleFeaturesAddView()
         navigateCreditCalculatePage()
@@ -33,7 +33,7 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
                 carData.vehicleImages?.firstOrNull()?.vehicleImage?.let { mainImage.loadImageFromURL(it) }
                 vehicleTitle.text = carData.vehicleTitle
                 vehiclePriceText.text = carData.vehiclePrice
-                creditInsurancePrice.text = carData.vehicleLoanAmount
+                creditInsurancePrice.text = carData.vehicleLoanAmount.toString().formatPriceWithDotsForDecimal() + CURRENCY
                 vehicleFeatureList.add(Pair(getString(R.string.arac_yil), carData.vehicleYear))
                 vehicleFeatureList.add(Pair(getString(R.string.marka), carData.vehicleBrand))
                 vehicleFeatureList.add(Pair(getString(R.string.model), carData.vehicleModel))
@@ -58,5 +58,9 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
             val action = VehicleDetailFragmentDirections.actionVehicleDetailFragmentToCreditCalculatorFragment(carData)
             findNavController().navigate(action)
         }
+    }
+
+    companion object {
+        private const val CURRENCY = " ₺"
     }
 }

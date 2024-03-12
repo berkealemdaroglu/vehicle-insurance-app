@@ -17,6 +17,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/margin_16dp"
             android:layout_marginTop="@dimen/margin_12dp"
+            android:visibility="visible"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
@@ -106,7 +107,6 @@
                             android:textColor="@color/toolbar_text_color"
                             android:textSize="@dimen/font_text_12sp" />
 
-
                         <TextView
                             android:id="@+id/vehicleInsurancePrice"
                             android:layout_width="0dp"
@@ -143,7 +143,6 @@
                             android:text="@string/maksimum_kredi_tutar"
                             android:textColor="@color/toolbar_text_color"
                             android:textSize="@dimen/font_text_12sp" />
-
 
                         <TextView
                             android:id="@+id/maxCreditAmount"
@@ -182,7 +181,6 @@
                             android:textColor="@color/toolbar_text_color"
                             android:textSize="@dimen/font_text_12sp" />
 
-
                         <TextView
                             android:id="@+id/maxCreditExpiry"
                             android:layout_width="0dp"
@@ -201,8 +199,40 @@
 
             </LinearLayout>
 
-
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/infoCreditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:drawablePadding="@dimen/margin_8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/kredi_olanagi_yok"
+            android:textColor="@color/secondary_color"
+            android:textSize="@dimen/font_text_12sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_info_icon"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/creditCalculatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/margin_12dp"
+            android:background="@drawable/stroke_home_credit_button_background"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_32dp"
+            android:text="@string/yine_de_hesapla"
+            android:textAllCaps="false"
+            android:textColor="@color/single_white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infoCreditTextView" />
 
         <TextView
             android:id="@+id/creditAmountText"
@@ -215,7 +245,7 @@
             android:textColor="@color/toolbar_text_color"
             android:textSize="@dimen/font_text_14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+            app:layout_constraintTop_toBottomOf="@+id/creditCalculatorButton" />
 
         <EditText
             android:id="@+id/creditAmountEditText"
@@ -278,6 +308,7 @@
             android:gravity="end|center"
             android:hint="@string/vade_suresi"
             android:inputType="number"
+            android:maxLength="2"
             android:paddingStart="@dimen/margin_16dp"
             android:paddingEnd="@dimen/margin_8dp"
             android:textColor="@color/secondary_color"
@@ -315,7 +346,7 @@
             app:layout_constraintTop_toBottomOf="@+id/expireDateSeekBar" />
 
         <EditText
-            android:id="@+id/percentEdittext"
+            android:id="@+id/interestPercentEdittext"
             android:layout_width="170dp"
             android:layout_height="@dimen/margin_40dp"
             android:layout_marginEnd="@dimen/margin_16dp"
@@ -326,6 +357,7 @@
             android:gravity="end|center"
             android:hint="@string/vade_oran"
             android:inputType="number"
+            android:maxLength="4"
             android:paddingStart="55dp"
             android:paddingEnd="@dimen/margin_16dp"
             android:textColor="@color/secondary_color"
@@ -345,13 +377,12 @@
             android:layout_marginTop="@dimen/margin_24dp"
             android:drawablePadding="@dimen/margin_8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="Aylık Taksit Tutarı ve Toplam Borç oranları tamamen tahmini olup, kesin bilgileri bankanızdan öğrenebilirsiniz."
+            android:text="@string/ayl_k_taksit_tutar_ve_toplam_bor_oranlar_tamamen_tahmini_olup_kesin_bilgileri_bankan_zdan_renebilirsiniz"
             android:textColor="@color/secondary_color"
             android:textSize="@dimen/font_text_12sp"
             app:drawableStartCompat="@drawable/ic_info_icon"
-            app:layout_constraintTop_toBottomOf="@+id/percentEdittext"
+            app:layout_constraintTop_toBottomOf="@+id/interestPercentEdittext"
             tools:layout_editor_absoluteX="16dp" />
-
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/creditResultCardView"
@@ -399,7 +430,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/purchasePriceText"
                     tools:text="22.897,56 TL" />
 
-
                 <View
                     android:id="@+id/centerLine"
                     android:layout_width="1dp"
@@ -410,7 +440,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
                 <TextView
                     android:id="@+id/totalPurchasePriceText"
@@ -439,7 +468,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/totalPurchasePriceText"
                     tools:text="2.200.897,56 TL" />
 
-
                 <View
                     android:id="@+id/verticalLine"
                     android:layout_width="match_parent"
@@ -459,14 +487,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/margin_8dp"
                     android:fontFamily="@font/poppins_light"
+                    android:text="@string/kredi_detay_info_text"
                     android:textColor="@color/credit_calculator_title_color"
                     android:textSize="@dimen/font_text_12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/verticalLine"
-                    tools:text="Yıllık Maliyet Oranı: %92,61" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -480,7 +507,6 @@
             <include layout="@layout/item_credit_calculator_info_layout" />
 
         </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

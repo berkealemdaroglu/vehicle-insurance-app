@@ -73,10 +73,13 @@ class SharedViewModel @Inject constructor(
             insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
                 data.isUpdateNecessary?.let { updateNecessary ->
                     if (updateNecessary) {
+                        dataStoreManager.clearDataStore()
+                        dataStoreManager.updateIsNeedDataRequest(true)
                         callRequests()
+                    } else {
+                        _splashLoading.emit(true)
                     }
                 }
-                _splashLoading.emit(true)
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
             }, isAutoLoading = false)
@@ -97,7 +100,6 @@ class SharedViewModel @Inject constructor(
                 dataStoreManager.storeVehicleData(gson.toJson(data))
                 dataStoreManager.updateIsNeedDataRequest(false)
                 vehicleInsuranceMapper = VehicleInsuranceMapper(data)
-                _splashLoading.emit(true)
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
                 dataStoreManager.updateIsNeedDataRequest(true)

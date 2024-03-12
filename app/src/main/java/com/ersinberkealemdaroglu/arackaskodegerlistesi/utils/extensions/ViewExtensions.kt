@@ -52,3 +52,12 @@ fun ImageView.loadImageFromURL(
         error(error)
     }
 }
+
+fun View.fadeOutAndHide(duration: Long = 300) {
+    this.animate()
+        .alpha(0f)
+        .setDuration(duration)
+        .withEndAction {
+            this.visibility = View.GONE
+        }
+}
