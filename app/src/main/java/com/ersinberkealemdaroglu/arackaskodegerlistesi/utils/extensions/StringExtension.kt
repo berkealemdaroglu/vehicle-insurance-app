@@ -21,12 +21,12 @@ fun String.formatPriceWithDotsForDecimal(): String {
 }
 
 fun String.formatInsuranceWithDotsForDecimal(): String {
-    return try {
-        val number = this.toDoubleOrNull()?.let { BigDecimal(it) }
-        val formatter = DecimalFormat("#,##")
-        formatter.format(number).replace(',', '.')
-    } catch (e: NumberFormatException) {
-        // Original text input
+    return if (this.length > 1) {
+        val firstDigit = this.substring(0, 1)
+        val remainingDigits = this.substring(1)
+
+        "$firstDigit.$remainingDigits"
+    } else {
         this
     }
 }
