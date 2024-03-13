@@ -49,8 +49,8 @@
             android:name="lowPriceCars"
             app:argType="com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel" />
         <action
-            android:id="@+id/action_vehicleSearchListFragment_to_creditCalculatorFragment"
-            app:destination="@id/creditCalculatorFragment" />
+            android:id="@+id/action_vehicleSearchListFragment_to_vehicleDetailFragment"
+            app:destination="@id/vehicleDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/vehicleDetailFragment"

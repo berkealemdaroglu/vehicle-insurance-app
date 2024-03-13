@@ -2,6 +2,8 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ActivityMainBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
@@ -14,6 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        window?.let { window ->
+            window.statusBarColor = ContextCompat.getColor(this, R.color.toolbar_text_color)
+        }
+
         setContentView(binding.root)
         setToolbar()
     }

@@ -11,10 +11,9 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class VehicleSearchListFragment :
-    BaseFragment<FragmentVehicleSearchListBinding, VehicleSearchListViewModel>(
-        FragmentVehicleSearchListBinding::inflate
-    ) {
+class VehicleSearchListFragment : BaseFragment<FragmentVehicleSearchListBinding, VehicleSearchListViewModel>(
+    FragmentVehicleSearchListBinding::inflate
+) {
 
     override val viewModel: VehicleSearchListViewModel by viewModels()
     private val args: VehicleSearchListFragmentArgs by navArgs()
@@ -37,8 +36,7 @@ class VehicleSearchListFragment :
 
     private fun setSearchView() {
         binding?.apply {
-            searchView.setOnQueryTextListener(object :
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
 
                     return false
@@ -66,10 +64,7 @@ class VehicleSearchListFragment :
 
     private fun openCreditCalculatorFragment() {
         adapter.onItemClicked = { carData ->
-            val action =
-                VehicleSearchListFragmentDirections.actionVehicleSearchListFragmentToCreditCalculatorFragment(
-                    carData
-                )
+            val action = VehicleSearchListFragmentDirections.actionVehicleSearchListFragmentToVehicleDetailFragment(carData)
             findNavController().navigate(action)
         }
 
