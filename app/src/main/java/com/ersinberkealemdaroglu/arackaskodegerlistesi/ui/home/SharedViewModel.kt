@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.CheckUpdateResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.di.DiModule
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.InsureUseCase
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.VehicleInsuranceMapper
@@ -41,6 +43,12 @@ class SharedViewModel @Inject constructor(
     private val _selectedVehicle = MutableStateFlow<Brand?>(null)
     val selectedVehicle: StateFlow<Brand?> = _selectedVehicle
 
+    private val _getVehicleBlogData = MutableStateFlow<VehicleBlogResponse?>(null)
+    val getVehicleBlogData: StateFlow<VehicleBlogResponse?> = _getVehicleBlogData
+
+    private var _setIsBlogVisible: Boolean? = null
+    val getIsBlogVisible: Boolean? get() = _setIsBlogVisible
+
     private var _setYear: String? = null
     val getYear: String? get() = _setYear
 
@@ -66,6 +74,7 @@ class SharedViewModel @Inject constructor(
     private fun checkUpdate(isFirstOpen: Boolean) {
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
+                _setIsBlogVisible = data.isBlogVisible
                 data.isUpdateNecessary?.let { updateNecessary ->
                     if (updateNecessary) {
                         dataStoreManager.clearDataStore()
@@ -113,6 +122,16 @@ class SharedViewModel @Inject constructor(
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
                 dataStoreManager.updateIsNeedDataRequest(true)
+            }, isAutoLoading = false)
+        }
+    }
+
+    fun getVehicleBlog() {
+        viewModelScope.launch(dispatcherIO) {
+            insureUseCase.getVehicleBlog().collectNetworkResult(onSuccess = { data ->
+                _getVehicleBlogData.emit(data)
+            }, onError = { errorMessage ->
+                _errorMessage.postValue(errorMessage)
             }, isAutoLoading = false)
         }
     }

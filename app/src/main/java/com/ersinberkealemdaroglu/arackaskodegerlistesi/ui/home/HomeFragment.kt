@@ -12,12 +12,14 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.C
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.datastore.DataStoreManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.adapter.HomeFragmentBlogAdapter
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.adapter.HomeFragmentLowPriceVehicleAdapter
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collapse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.collectWhenStarted
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.vehicleLoanAmountCalculator
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,16 +29,18 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(FragmentHomeBinding::inflate) {
 
     override val viewModel: SharedViewModel by activityViewModels()
-
     private lateinit var homeFragmentLowPriceVehicleAdapter: HomeFragmentLowPriceVehicleAdapter
-
+    private lateinit var homeBlogAdapter: HomeFragmentBlogAdapter
     private val dataStoreManager = DataStoreManager()
 
     override fun initUI(view: View) {
+        viewModel.getVehicleBlog()
+
         insureButtonHandle()
         selectedVehicleState()
         getLowPriceVehicles()
         openCreditCalculatorFragment()
+        vehicleBlogObserve()
     }
 
     private fun insureButtonHandle() {
@@ -178,6 +182,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
                 carDataResponseModel
             )
             findNavController().navigate(action)
+        }
+    }
+
+    private fun vehicleBlogObserve() {
+        binding?.apply {
+            if (viewModel.getIsBlogVisible == true) {
+                blogTextLayout.gone()
+                blogRV.gone()
+            } else {
+                viewModel.getVehicleBlogData.collectWhenStarted(viewLifecycleOwner) { vehicleBlog ->
+                    if (vehicleBlog != null) {
+                        homeBlogAdapter = HomeFragmentBlogAdapter(vehicleBlog)
+                        blogRV.adapter = homeBlogAdapter
+                    }
+                }
+            }
+
+            if (::homeBlogAdapter.isInitialized) {
+                homeBlogAdapter.onItemClickCallback = { vehicleBlogItem ->
+                    val action = HomeFragmentDirections.actionHomeFragmentToBlogFragment(vehicleBlogItem)
+                    findNavController().navigate(action)
+                }
+            }
+
         }
     }
 

@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CheckUpdateResponseModel(
     @SerializedName("isUpdateNecessary")
-    val isUpdateNecessary: Boolean? = false
+    val isUpdateNecessary: Boolean? = false,
+    @SerializedName("isBlogVisible")
+    val isBlogVisible: Boolean? = false
 )
