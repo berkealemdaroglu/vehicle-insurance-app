@@ -21,6 +21,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/text_background_color"
         android:scaleType="fitXY"
         android:src="@drawable/ic_list_text_bg"
         app:layout_constraintBottom_toBottomOf="@id/imgBackground"
@@ -38,7 +39,7 @@
         android:fontFamily="@font/poppins_regular"
         android:maxLines="1"
         android:minLines="1"
-        android:textColor="@color/single_white"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_text_14sp"
         app:layout_constraintBottom_toBottomOf="@id/imgBackground"
         app:layout_constraintEnd_toEndOf="@+id/imgBackground"
