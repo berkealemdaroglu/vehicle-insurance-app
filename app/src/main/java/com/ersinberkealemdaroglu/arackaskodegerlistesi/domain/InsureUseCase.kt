@@ -16,4 +16,6 @@ class InsureUseCase @Inject constructor(private val insureRepository: InsureRepo
 
     fun checkUpdate(): Flow<NetworkResult<CheckUpdateResponseModel>> = insureRepository.checkUpdate()
 
+    fun getVehicleBlog(): Flow<NetworkResult<com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse> > = insureRepository.getVehicleBlog()
+
 }

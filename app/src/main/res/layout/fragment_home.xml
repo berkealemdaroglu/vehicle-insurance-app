@@ -116,7 +116,7 @@
                 android:maxLines="1"
                 android:minLines="1"
                 android:paddingVertical="@dimen/margin_4dp"
-                android:text="Tümünü Gör"
+                android:text="@string/tumunu_gor"
                 android:textColor="@color/secondary_color"
                 android:textSize="@dimen/font_text_14sp" />
 
@@ -133,6 +133,41 @@
             android:paddingEnd="@dimen/margin_12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_home_fragment_cars" />
+
+        <LinearLayout
+            android:id="@+id/blogTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/arac_alim_satim_rehberi"
+                android:textColor="@color/toolbar_text_color"
+                android:textSize="@dimen/font_text_16sp" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/blogRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_12dp"
+            android:paddingEnd="@dimen/margin_12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_blog_rv" />
 
     </LinearLayout>
 

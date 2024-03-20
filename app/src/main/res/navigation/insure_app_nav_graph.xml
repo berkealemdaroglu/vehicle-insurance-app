@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_vehicleDetailFragment"
             app:destination="@id/vehicleDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_blogFragment"
+            app:destination="@id/blogFragment" />
     </fragment>
     <fragment
         android:id="@+id/creditCalculatorFragment"
@@ -44,7 +47,7 @@
         android:id="@+id/vehicleSearchListFragment"
         android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment"
         android:label="fragment_vehicle_search_list"
-        tools:layout="@layout/fragment_vehicle_search_list" >
+        tools:layout="@layout/fragment_vehicle_search_list">
         <argument
             android:name="lowPriceCars"
             app:argType="com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel" />
@@ -56,12 +59,21 @@
         android:id="@+id/vehicleDetailFragment"
         android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detail.VehicleDetailFragment"
         android:label="fragment_vehicle_detail"
-        tools:layout="@layout/fragment_vehicle_detail" >
+        tools:layout="@layout/fragment_vehicle_detail">
         <argument
             android:name="lowPriceCar"
             app:argType="com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem" />
         <action
             android:id="@+id/action_vehicleDetailFragment_to_creditCalculatorFragment"
             app:destination="@id/creditCalculatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.blog.BlogFragment"
+        android:label="fragment_blog"
+        tools:layout="@layout/fragment_blog">
+        <argument
+            android:name="VehicleBlogResponseItem"
+            app:argType="com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponseItem" />
     </fragment>
 </navigation>
