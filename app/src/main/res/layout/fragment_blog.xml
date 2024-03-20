@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.blog.BlogFragment">
 
-    <ImageView
-        android:id="@+id/blogItemImageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitXY" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/blogItemTitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_12dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/toolbar_text_color"
-        android:textSize="@dimen/font_text_16sp"
-        tools:text="Blog Title" />
+        <ImageView
+            android:id="@+id/blogItemImageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY" />
 
-    <TextView
-        android:id="@+id/blogItemContentTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_12dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/toolbar_text_color"
-        android:textSize="@dimen/font_text_14sp"
-        tools:text="Blog Content" />
+        <TextView
+            android:id="@+id/blogItemTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_16sp"
+            tools:text="Blog Title" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/blogItemContentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:fontFamily="@font/poppins_regular"
+            android:scrollbarSize="@dimen/margin_4dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            android:scrollHorizontally="false"
+            android:textColor="@color/toolbar_text_color"
+            android:textSize="@dimen/font_text_14sp"
+            tools:text="Blog Content" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

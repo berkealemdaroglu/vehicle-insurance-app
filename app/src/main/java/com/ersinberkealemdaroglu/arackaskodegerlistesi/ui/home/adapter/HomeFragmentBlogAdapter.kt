@@ -8,13 +8,14 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBl
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemBlogRvBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
 
-class HomeFragmentBlogAdapter(private val vehicleBlog: VehicleBlogResponse) :
+class HomeFragmentBlogAdapter :
     RecyclerView.Adapter<HomeFragmentBlogAdapter.HomeFragmentBlogViewHolder>() {
+    private val vehicleBlog: VehicleBlogResponse = VehicleBlogResponse()
     var onItemClickCallback: ((VehicleBlogResponseItem) -> Unit)? = null
 
-    class HomeFragmentBlogViewHolder(private val binding: ItemBlogRvBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HomeFragmentBlogViewHolder(private val binding: ItemBlogRvBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindBlog(vehicleBlogItem: VehicleBlogResponseItem, onItemClickCallback: ((VehicleBlogResponseItem) -> Unit)?) {
+        fun bindBlog(vehicleBlogItem: VehicleBlogResponseItem) {
             binding.apply {
                 vehicleBlogItem.blogImage?.let { imgBackground.loadImageFromURL(it) }
                 blogItemTitleTextView.text = vehicleBlogItem.blogTitle
@@ -34,7 +35,13 @@ class HomeFragmentBlogAdapter(private val vehicleBlog: VehicleBlogResponse) :
     override fun getItemCount(): Int = vehicleBlog.size
 
     override fun onBindViewHolder(holder: HomeFragmentBlogViewHolder, position: Int) {
-        holder.bindBlog(vehicleBlog[position], onItemClickCallback)
+        holder.bindBlog(vehicleBlog[position])
+    }
+
+    fun setVehicleBlog(vehicleBlog: VehicleBlogResponse) {
+        this.vehicleBlog.clear()
+        this.vehicleBlog.addAll(vehicleBlog)
+        notifyItemChanged(vehicleBlog.size)
     }
 
 }
