@@ -15,6 +15,7 @@
             android:id="@+id/mainImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/vehicle_image"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_insure_app_logo" />
 
@@ -95,7 +96,7 @@
                     android:fontFamily="@font/poppins_bold"
                     android:maxLines="1"
                     android:minLines="1"
-                    android:text="Tahmini Kredi Tutarı"
+                    android:text="@string/tahmini_kredi_tutar"
                     android:textSize="@dimen/font_text_14sp"
                     app:layout_constraintEnd_toStartOf="@+id/creditCalculatorButton"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +115,7 @@
                     android:paddingHorizontal="@dimen/margin_24dp"
                     android:text="@string/kredi_hesapla"
                     android:textAllCaps="false"
-                    android:textColor="@color/single_white"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

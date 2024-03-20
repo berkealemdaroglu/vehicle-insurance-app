@@ -61,7 +61,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
 
             modelButton.setOnClickListener {
                 viewModel.vehicleInsuranceMapper.filterByYearAndBrand(viewModel.getYear, viewModel.getBrand) { response ->
-                    viewModel.setSelectedFilter(brandList = response)
+                    val sortedResponse = response?.sortedBy { it.vehicleModels?.firstOrNull()?.modelName }
+                    viewModel.setSelectedFilter(brandList = sortedResponse)
                     openVehicleFilterBottomSheet(SelectedVehicleFilterItem.SELECTED_MODEL)
                 }
             }
@@ -195,6 +196,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
                     if (vehicleBlog != null) {
                         homeBlogAdapter.setVehicleBlog(vehicleBlog)
                         blogRV.adapter = homeBlogAdapter
+                        blogRV.setHasFixedSize(true)
                     }
                 }
             }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.CheckUpdateResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.di.DiModule
@@ -138,7 +137,7 @@ class SharedViewModel @Inject constructor(
 
     fun setSelectedFilter(brandList: List<Brand>? = null) {
         viewModelScope.launch {
-            _selectedFilterVehicle.emit(brandList?.let {
+            _selectedFilterVehicle.emit(brandList?.sortedBy { it.brandName }?.let {
                 FilterVehicleModel(
                     filterBrandsList = it
                 )

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/app_background_color"
     android:orientation="vertical">
 
     <TextView
@@ -10,10 +12,9 @@
         android:layout_marginHorizontal="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Taşıt kredi işlemlerinde kredi tutarının, taşıt tutarına oranı ve azami vadeler aşıdaki gibidir."
+        android:text="@string/ta_t_kredi_i_lemlerinde_kredi_tutar_n_n_ta_t_tutar_na_oran_ve_azami_vadeler_a_daki_gibidir"
         android:textColor="@color/credit_calculator_info_title_color"
         android:textSize="@dimen/font_text_12sp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_regular"
-            android:text="Kasko Değeri"
+            android:text="@string/kasko_de_eri"
             android:textColor="@color/secondary_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -40,7 +41,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="Max Oran"
+            android:text="@string/max_oran"
             android:textColor="@color/secondary_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -51,7 +52,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_regular"
             android:gravity="end"
-            android:text="Azami Vade"
+            android:text="@string/azami_vade"
             android:textColor="@color/secondary_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -76,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_light"
-            android:text="0 TL - 400.000 TL"
+            android:text="@string/_0_tl_400_000_tl"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -88,7 +89,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="70%"
+            android:text="@string/_70"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -99,7 +100,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="end"
-            android:text="48 Ay"
+            android:text="@string/_48_ay"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -124,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_light"
-            android:text="400.001 TL - 800.000 TL"
+            android:text="@string/_400_001_tl_800_000_tl"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -136,7 +137,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="50%"
+            android:text="@string/_50"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -147,7 +148,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="end"
-            android:text="36 Ay"
+            android:text="@string/_36_ay"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -172,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_light"
-            android:text="800.001 TL - 1.200.000 TL"
+            android:text="@string/_800_001_tl_1_200_000_tl"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -184,7 +185,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="30%"
+            android:text="@string/_30"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -195,7 +196,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="end"
-            android:text="24 Ay"
+            android:text="@string/_24_ay"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -220,7 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_light"
-            android:text="1.200.001 TL - 2.000.000 TL"
+            android:text="@string/_1_200_001_tl_2_000_000_tl"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -232,7 +233,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="20%"
+            android:text="@string/_20"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -243,7 +244,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="end"
-            android:text="12 Ay"
+            android:text="@string/_12_ay"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -268,7 +269,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="@font/poppins_light"
-            android:text="2.000.000 TL ve üzeri"
+            android:text="@string/_2_000_000_tl_ve_zeri"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -280,7 +281,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="0%"
+            android:text="@string/_0"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
 
@@ -291,7 +292,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_light"
             android:gravity="end"
-            android:text="0 Ay"
+            android:text="@string/_0_ay"
             android:textColor="@color/credit_calculator_info_title_color"
             android:textSize="@dimen/font_text_12sp" />
     </LinearLayout>
@@ -302,11 +303,11 @@
         android:layout_marginHorizontal="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginBottom="@dimen/margin_32dp"
-        android:drawableStart="@drawable/ic_info_icon"
         android:drawablePadding="@dimen/margin_8dp"
         android:fontFamily="@font/poppins_light"
-        android:text="İkinci el araçlar için en fazla 9 yaşındaki araçlara kredi çıkmaktadır. (Araç yaşı bankadan bankaya değişiklik göstermektedir.)"
+        android:text="@string/kinci_el_ara_lar_i_in_en_fazla_9_ya_ndaki_ara_lara_kredi_kmaktad_r_ara_ya_bankadan_bankaya_de_i_iklik_g_stermektedir"
         android:textColor="@color/secondary_color"
-        android:textSize="@dimen/font_text_12sp" />
+        android:textSize="@dimen/font_text_12sp"
+        app:drawableStartCompat="@drawable/ic_info_icon" />
 
 </LinearLayout>
