@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.MainActivity
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.blog.BlogFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator.CreditCalculatorFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detail.VehicleDetailFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment
@@ -106,6 +107,13 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel?>(
                 activityBinding?.showToolbar()
                 activityBinding?.setToolbar(leftIconDrawable = R.drawable.btn_back,
                     title = getString(R.string.kredi_hesaplama),
+                    leftButtonClickListener = { findNavController().navigateUp() })
+            }
+
+            is BlogFragment -> {
+                activityBinding?.showToolbar()
+                activityBinding?.setToolbar(leftIconDrawable = R.drawable.btn_back,
+                    title = getString(R.string.blog),
                     leftButtonClickListener = { findNavController().navigateUp() })
             }
         }

@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
 
     override val viewModel: SharedViewModel by activityViewModels()
     private lateinit var homeFragmentLowPriceVehicleAdapter: HomeFragmentLowPriceVehicleAdapter
-    private lateinit var homeBlogAdapter: HomeFragmentBlogAdapter
+    private val homeBlogAdapter: HomeFragmentBlogAdapter = HomeFragmentBlogAdapter()
     private val dataStoreManager = DataStoreManager()
 
     override fun initUI(view: View) {
@@ -193,19 +193,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
             } else {
                 viewModel.getVehicleBlogData.collectWhenStarted(viewLifecycleOwner) { vehicleBlog ->
                     if (vehicleBlog != null) {
-                        homeBlogAdapter = HomeFragmentBlogAdapter(vehicleBlog)
+                        homeBlogAdapter.setVehicleBlog(vehicleBlog)
                         blogRV.adapter = homeBlogAdapter
                     }
                 }
             }
-
-            if (::homeBlogAdapter.isInitialized) {
-                homeBlogAdapter.onItemClickCallback = { vehicleBlogItem ->
-                    val action = HomeFragmentDirections.actionHomeFragmentToBlogFragment(vehicleBlogItem)
-                    findNavController().navigate(action)
-                }
+            homeBlogAdapter.onItemClickCallback = { vehicleBlogItem ->
+                val action = HomeFragmentDirections.actionHomeFragmentToBlogFragment(vehicleBlogItem)
+                findNavController().navigate(action)
             }
-
         }
     }
 

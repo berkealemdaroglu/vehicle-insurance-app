@@ -37,4 +37,5 @@
     <string name="kredi_olanagi_yok">Üzgünüz, aracın kasko değeri 2.000.000 TL\'yi aştığı için kredi olanağı sunulamamaktadır.</string>
     <string name="ayl_k_taksit_tutar_ve_toplam_bor_oranlar_tamamen_tahmini_olup_kesin_bilgileri_bankan_zdan_renebilirsiniz">Aylık Taksit Tutarı ve Toplam Borç oranları tamamen tahmini olup, kesin bilgileri bankanızdan öğrenebilirsiniz.</string>
     <string name="tumunu_gor">Tümünü Gör</string>
+    <string name="blog">Blog</string>
 </resources>
