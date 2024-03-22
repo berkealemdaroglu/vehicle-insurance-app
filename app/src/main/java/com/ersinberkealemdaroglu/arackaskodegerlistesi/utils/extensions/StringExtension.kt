@@ -8,6 +8,10 @@ import android.widget.SeekBar
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import java.math.BigDecimal
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 fun String.formatPriceWithDotsForDecimal(): String {
     return try {
@@ -164,4 +168,20 @@ fun SeekBar.seekBarChangeListener(onSeekBarChangeListener: (Int) -> Unit) {
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
         }
     })
+}
+
+// String sınıfı için bir extension function tanımlayın
+fun String.toDateWithFormat(
+    format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+    onError: (Exception) -> Unit
+): Date? {
+    val formatter = SimpleDateFormat(format, Locale.getDefault()).apply {
+        timeZone = TimeZone.getTimeZone("UTC")
+    }
+    return try {
+        formatter.parse(this)
+    } catch (e: Exception) {
+        onError(e) // Parse sırasında hata oluşursa onError callback'i çağrılacak
+        null
+    }
 }

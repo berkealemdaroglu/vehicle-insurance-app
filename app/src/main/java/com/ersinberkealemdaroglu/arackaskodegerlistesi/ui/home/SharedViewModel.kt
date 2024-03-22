@@ -12,15 +12,13 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.VehicleInsuranceMa
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.datastore.DataStoreManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.model.FilterVehicleModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseViewModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.toDateWithFormat
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
 import javax.inject.Inject
 
 @HiltViewModel
@@ -75,9 +73,6 @@ class SharedViewModel @Inject constructor(
 
     private fun checkUpdate(isFirstOpen: Boolean) {
 
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        format.timeZone = TimeZone.getTimeZone("UTC")
-
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
                 _setIsBlogVisible = data.isBlogVisible
@@ -91,8 +86,13 @@ class SharedViewModel @Inject constructor(
                         callRequests()
                     } else {
 
-                        val formattedUpdateDate = format.parse(updateDate)
-                        val formattedSavedUpdateDate = format.parse(savedUpdateDate)
+                        val formattedUpdateDate = updateDate.toDateWithFormat {
+                            _errorMessage.postValue(it.message)
+                        } ?: return@collectNetworkResult
+
+                        val formattedSavedUpdateDate = savedUpdateDate.toDateWithFormat {
+                            _errorMessage.postValue(it.message)
+                        }
 
                         if (formattedUpdateDate.after(formattedSavedUpdateDate)) {
                             dataStoreManager.clearDataStore()
@@ -104,6 +104,8 @@ class SharedViewModel @Inject constructor(
                             _splashLoading.emit(true)
                         }
                     }
+                } ?: run {
+                   callRequests()
                 }
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
