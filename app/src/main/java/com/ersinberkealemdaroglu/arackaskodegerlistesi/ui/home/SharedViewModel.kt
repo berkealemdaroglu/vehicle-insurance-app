@@ -18,6 +18,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,18 +74,35 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun checkUpdate(isFirstOpen: Boolean) {
+
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        format.timeZone = TimeZone.getTimeZone("UTC")
+
         viewModelScope.launch(dispatcherIO) {
             insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
                 _setIsBlogVisible = data.isBlogVisible
-                data.isUpdateNecessary?.let { updateNecessary ->
-                    if (updateNecessary) {
-                        dataStoreManager.clearDataStore()
-                        dataStoreManager.updateIsNeedDataRequest(true)
-                        callRequests()
-                    } else if (isFirstOpen) {
+
+                data.updateDate?.let { updateDate ->
+
+                    val savedUpdateDate = dataStoreManager.readDateForUpdate()
+
+                    if (isFirstOpen) {
+                        dataStoreManager.storeDateForUpdate(updateDate)
                         callRequests()
                     } else {
-                        _splashLoading.emit(true)
+
+                        val formattedUpdateDate = format.parse(updateDate)
+                        val formattedSavedUpdateDate = format.parse(savedUpdateDate)
+
+                        if (formattedUpdateDate.after(formattedSavedUpdateDate)) {
+                            dataStoreManager.clearDataStore()
+                            dataStoreManager.updateIsNeedDataRequest(false)
+                            dataStoreManager.storeDateForUpdate(updateDate)
+                            callRequests()
+
+                        } else {
+                            _splashLoading.emit(true)
+                        }
                     }
                 }
             }, onError = { errorMessage ->

@@ -67,7 +67,6 @@ class VehicleSearchListFragment : BaseFragment<FragmentVehicleSearchListBinding,
             val action = VehicleSearchListFragmentDirections.actionVehicleSearchListFragmentToVehicleDetailFragment(carData)
             findNavController().navigate(action)
         }
-
     }
 
     fun openFilterBottomSheet() {

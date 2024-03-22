@@ -21,6 +21,7 @@ class DataStoreManager {
         val VEHICLE_DATA = stringPreferencesKey("VEHICLE_DATA")
         val IS_FIRST_OPEN = booleanPreferencesKey("IS_FIRST_OPEN")
         val LOW_PRICE_VEHICLE_DATA = stringPreferencesKey("LOW_PRICE_VEHICLE_DATA")
+        val DATE = stringPreferencesKey("DATE")
     }
 
     suspend fun storeVehicleData(
@@ -41,6 +42,14 @@ class DataStoreManager {
         }
     }
 
+    suspend fun storeDateForUpdate(
+        date: String
+    ) {
+        vehicleDatastore.edit { preferences ->
+            preferences[DATE] = date
+        }
+    }
+
     suspend fun readIsNeedDataRequest(): Boolean = vehicleDatastore.data.map { preferences ->
         preferences[IS_FIRST_OPEN] ?: true
     }.first()
@@ -57,6 +66,10 @@ class DataStoreManager {
 
     suspend fun readVehicleData(): String = vehicleDatastore.data.map { preferences ->
         preferences[VEHICLE_DATA] ?: ""
+    }.first()
+
+    suspend fun readDateForUpdate(): String = vehicleDatastore.data.map { preferences ->
+        preferences[DATE] ?: ""
     }.first()
 
     suspend fun clearDataStore() {

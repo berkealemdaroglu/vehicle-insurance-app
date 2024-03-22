@@ -3,8 +3,8 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model
 import com.google.gson.annotations.SerializedName
 
 data class CheckUpdateResponseModel(
-    @SerializedName("isUpdateNecessary")
-    val isUpdateNecessary: Boolean? = false,
+    @SerializedName("updateDate")
+    val updateDate: String? = null,
     @SerializedName("isBlogVisible")
     val isBlogVisible: Boolean? = false
 )
