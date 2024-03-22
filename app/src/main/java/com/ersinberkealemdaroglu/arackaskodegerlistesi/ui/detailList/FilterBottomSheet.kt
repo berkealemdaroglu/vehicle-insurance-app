@@ -25,6 +25,8 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomS
 
         )
 
+        // RECYCLERVIEW' YERINE DENEME AMACLI LINEAR LAYOUT'TA ADDVIEW YAPILDI.
+
         filterList.forEachIndexed { index, filter ->
             val itemBinding = ItemFilterBinding.inflate(
                 LayoutInflater.from(view.context), binding?.linearLayout, false
@@ -53,14 +55,12 @@ class FilterBottomSheet(private val carData: CarDataResponseModel) : BaseBottomS
     private fun updateIcons() {
         // LinearLayout içindeki tüm çocuklar için döngü
         for (i in 0 until (binding?.linearLayout?.childCount ?: 0)) {
-            // Doğru dönüşüm için önce çocuk görünümü al
+
             val childView = binding?.linearLayout?.getChildAt(i)
 
-            // 'childView' üzerinden ItemFilterBinding örneğini elde et
             childView?.let { child ->
                 val itemBinding = ItemFilterBinding.bind(child)
 
-                // Seçili indekse göre ikonu güncelle
                 if (i == selectedFilterIndex) {
                     itemBinding.itemIcon.setImageResource(R.drawable.ic_filter_active)
                     when (selectedFilterIndex) {

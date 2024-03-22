@@ -48,7 +48,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext appContext: Context, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val builder = OkHttpClient.Builder().addInterceptor(loggingInterceptor).readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
+        val builder = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(ChuckerInterceptor.Builder(context = appContext).build())
         }
