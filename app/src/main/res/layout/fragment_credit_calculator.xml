@@ -505,14 +505,14 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
+        <com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.customViews.VehicleInsuranceCreditRatesCustomView
+            android:id="@+id/vehicleInsuranceCreditRatesCustomView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/creditResultCardView">
-
-            <include layout="@layout/item_credit_calculator_info_layout" />
-
-        </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creditResultCardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

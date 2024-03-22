@@ -18,4 +18,6 @@ class InsureUseCase @Inject constructor(private val insureRepository: InsureRepo
 
     fun getVehicleBlog(): Flow<NetworkResult<com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse> > = insureRepository.getVehicleBlog()
 
+    fun getVehicleInsuranceCreditRates(): Flow<NetworkResult<com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.vehicleInsuranceCreditRates.VehicleInsuranceCreditRates>> = insureRepository.getVehicleInsuranceCreditRates()
+
 }
