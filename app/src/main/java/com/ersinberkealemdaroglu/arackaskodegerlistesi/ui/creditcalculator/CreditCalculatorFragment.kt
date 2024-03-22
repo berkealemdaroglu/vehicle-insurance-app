@@ -188,12 +188,16 @@ class CreditCalculatorFragment : BaseFragment<FragmentCreditCalculatorBinding, C
     }
 
     private fun vehicleInsuranceCreditRatesCollect() {
-        viewModel.getVehicleInsuranceCreditRates()
         binding?.apply {
+            progressBar.visible()
+
+            viewModel.getVehicleInsuranceCreditRates()
             lifecycleScope.launch {
                 viewModel.getVehicleInsuranceCreditRates.collectLatest { result ->
                     result?.let { creditRates ->
-                        binding?.vehicleInsuranceCreditRatesCustomView?.setVehicleInsuranceCreditRates(creditRates)
+                        vehicleInsuranceCreditRatesCustomView.setVehicleInsuranceCreditRates(creditRates)
+                        progressBar.gone()
+                        vehicleInsuranceCreditRatesCustomView.visible()
                     }
                 }
             }

@@ -10,8 +10,10 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentVehic
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.ItemFeaturesDetailPageBinding
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.invisible
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -65,16 +67,26 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
     }
 
     private fun vehicleInsuranceCreditRatesCollect() {
-        viewModel.getVehicleInsuranceCreditRates()
         binding?.apply {
+            progressBar.visible()
+
+            viewModel.getVehicleInsuranceCreditRates()
             lifecycleScope.launch {
                 viewModel.getVehicleInsuranceCreditRates.collectLatest { result ->
                     result?.let { creditRates ->
-                        binding?.vehicleInsuranceCreditRatesCustomView?.setVehicleInsuranceCreditRates(creditRates)
+                        vehicleInsuranceCreditRatesCustomView.setVehicleInsuranceCreditRates(creditRates)
+                        progressBar.gone()
+                        vehicleInsuranceCreditRatesCustomView.visible()
                     }
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        vehicleFeatureList.clear()
     }
 
     companion object {

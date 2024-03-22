@@ -32,7 +32,7 @@ class CreditCalculatorViewModel @Inject constructor(
                 _getVehicleInsuranceCreditRates.emit(data)
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
-            }, isAutoLoading = true)
+            }, isAutoLoading = false)
         }
     }
 }
