@@ -1,6 +1,7 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.repositoryImp
 
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.vehicleInsuranceCreditRates.VehicleInsuranceCreditRates
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.datasource.InsureDataSource
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.InsureRepository
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.network.NetworkResult
@@ -25,6 +26,10 @@ class InsureRepositoryImp @Inject constructor(private val insureDataSource: Insu
 
     override fun getVehicleBlog(): Flow<NetworkResult<VehicleBlogResponse>> = runRepositorySafe {
         insureDataSource.getVehicleBlog()
+    }
+
+    override fun getVehicleInsuranceCreditRates(): Flow<NetworkResult<VehicleInsuranceCreditRates>> = runRepositorySafe {
+        insureDataSource.getVehicleInsuranceCreditRates()
     }
 
 }

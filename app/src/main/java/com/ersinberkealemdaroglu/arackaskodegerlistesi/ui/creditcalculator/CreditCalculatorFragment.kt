@@ -21,6 +21,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.replaceM
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.seekBarChangeListener
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,6 +40,7 @@ class CreditCalculatorFragment : BaseFragment<FragmentCreditCalculatorBinding, C
         creditEdittextListeners()
         seekBarListener()
         againCreditCalculatorSetupUI()
+        vehicleInsuranceCreditRatesCollect()
     }
 
     private fun setupUI() {
@@ -179,6 +181,19 @@ class CreditCalculatorFragment : BaseFragment<FragmentCreditCalculatorBinding, C
                     result?.let { creditModel ->
                         purchasePrice.text = creditModel.monthlyPayment + CURRENCY
                         totalPurchasePrice.text = creditModel.totalPayment + CURRENCY
+                    }
+                }
+            }
+        }
+    }
+
+    private fun vehicleInsuranceCreditRatesCollect() {
+        viewModel.getVehicleInsuranceCreditRates()
+        binding?.apply {
+            lifecycleScope.launch {
+                viewModel.getVehicleInsuranceCreditRates.collectLatest { result ->
+                    result?.let { creditRates ->
+                        binding?.vehicleInsuranceCreditRatesCustomView?.setVehicleInsuranceCreditRates(creditRates)
                     }
                 }
             }

@@ -81,6 +81,7 @@
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/creditVehicleLayoutInner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -143,8 +144,14 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <include layout="@layout/item_credit_calculator_info_layout" />
-
+        <com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.customViews.VehicleInsuranceCreditRatesCustomView
+            android:id="@+id/vehicleInsuranceCreditRatesCustomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creditVehicleLayoutInner" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

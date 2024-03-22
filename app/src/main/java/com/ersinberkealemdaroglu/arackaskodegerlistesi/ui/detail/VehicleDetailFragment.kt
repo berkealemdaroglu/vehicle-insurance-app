@@ -2,6 +2,7 @@ package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detail
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
@@ -12,6 +13,8 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPr
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.invisible
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.loadImageFromURL
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, VehicleDetailViewModel>(FragmentVehicleDetailBinding::inflate) {
@@ -57,6 +60,19 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
         binding?.creditCalculatorButton?.setOnClickListener {
             val action = VehicleDetailFragmentDirections.actionVehicleDetailFragmentToCreditCalculatorFragment(carData)
             findNavController().navigate(action)
+        }
+    }
+
+    private fun vehicleInsuranceCreditRatesCollect() {
+        viewModel.getVehicleInsuranceCreditRates()
+        binding?.apply {
+            lifecycleScope.launch {
+                viewModel.getVehicleInsuranceCreditRates.collectLatest { result ->
+                    result?.let { creditRates ->
+                        binding?.vehicleInsuranceCreditRatesCustomView?.setVehicleInsuranceCreditRates(creditRates)
+                    }
+                }
+            }
         }
     }
 

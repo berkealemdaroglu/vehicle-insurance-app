@@ -4,6 +4,7 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.CheckUpdateRes
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.vehicleInsuranceCreditRates.VehicleInsuranceCreditRates
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -20,4 +21,7 @@ interface InsureService {
 
     @GET("car/blog.json")
     suspend fun getVehicleBlog(): Response<VehicleBlogResponse>
+
+    @GET("/car/vehicle_insurance_credit_rates.json")
+    suspend fun getVehicleInsuranceCreditRates(): Response<VehicleInsuranceCreditRates>
 }
