@@ -88,11 +88,11 @@ class SharedViewModel @Inject constructor(
 
                         val formattedUpdateDate = updateDate.toDateWithFormat {
                             _errorMessage.postValue(it.message)
-                        } ?: return@collectNetworkResult
+                        } ?: return@collectNetworkResult // Return early if null
 
                         val formattedSavedUpdateDate = savedUpdateDate.toDateWithFormat {
                             _errorMessage.postValue(it.message)
-                        }
+                        } ?: return@collectNetworkResult // Return early if null
 
                         if (formattedUpdateDate.after(formattedSavedUpdateDate)) {
                             dataStoreManager.clearDataStore()
@@ -105,8 +105,9 @@ class SharedViewModel @Inject constructor(
                         }
                     }
                 } ?: run {
-                   callRequests()
+                    callRequests()
                 }
+
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
             }, isAutoLoading = false)

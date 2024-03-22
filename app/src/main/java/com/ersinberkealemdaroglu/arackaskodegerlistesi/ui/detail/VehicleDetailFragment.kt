@@ -28,6 +28,7 @@ class VehicleDetailFragment : BaseFragment<FragmentVehicleDetailBinding, Vehicle
         setupUI()
         vehicleFeaturesAddView()
         navigateCreditCalculatePage()
+        vehicleInsuranceCreditRatesCollect()
     }
 
     private fun setupUI() {
