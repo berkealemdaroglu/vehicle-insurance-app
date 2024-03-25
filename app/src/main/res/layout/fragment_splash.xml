@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.splash.SplashFragment">
+    tools:context=".presentation.ui.splash.SplashFragment">
 
-    <com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.CustomLoadingAnim
+    <com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.customviews.CustomLoadingAnim
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_insure_app_logo">
 
-    </com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.CustomLoadingAnim>
+    </com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.customviews.CustomLoadingAnim>
 
 </FrameLayout>

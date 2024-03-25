@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/left_icon"
-        android:layout_width="32dp"
+        android:layout_width="@dimen/margin_48dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_8dp"
+        android:padding="@dimen/margin_4dp"
         android:contentDescription="@string/arac_kasko_logosu"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,8 +25,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:gravity="center"
+        android:layout_marginHorizontal="@dimen/margin_16dp"
         android:textColor="@color/toolbar_text_color"
         android:textSize="@dimen/font_number_18sp"
+        android:maxLines="1"
+        android:minLines="1"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/right_icon"
         app:layout_constraintStart_toEndOf="@+id/left_icon"
@@ -34,9 +39,10 @@
 
     <ImageView
         android:id="@+id/right_icon"
-        android:layout_width="32dp"
+        android:layout_width="@dimen/margin_48dp"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/margin_16dp"
+        android:padding="@dimen/margin_8dp"
         android:contentDescription="@string/bu_buton_ile_s_ralama_i_lemi_yapabilirsiniz"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"

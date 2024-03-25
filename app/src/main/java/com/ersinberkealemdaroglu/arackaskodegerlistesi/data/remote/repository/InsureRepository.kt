@@ -9,14 +9,9 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.network.NetworkResu
 import kotlinx.coroutines.flow.Flow
 
 interface InsureRepository {
-
     fun getVehicleInsurance(): Flow<NetworkResult<VehicleInsuranceResponse>>
-
     fun getLowVehicles(): Flow<NetworkResult<CarDataResponseModel>>
-
     fun checkUpdate(): Flow<NetworkResult<CheckUpdateResponseModel>>
-
     fun getVehicleBlog(): Flow<NetworkResult<VehicleBlogResponse>>
-
     fun getVehicleInsuranceCreditRates(): Flow<NetworkResult<VehicleInsuranceCreditRates>>
 }

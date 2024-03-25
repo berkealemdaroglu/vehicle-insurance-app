@@ -1,7 +1,7 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model
 
 import android.os.Parcelable
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.bottomsheet.SelectedVehicleFilterItem
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.home.bottomsheet.SelectedVehicleFilterItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -19,7 +19,7 @@ data class Years(
 data class Brand(
     @SerializedName("marka_adi")
     val brandName: String? = null,
-    var years: String? = null,
+    var vehicleYear: String? = null,
     @SerializedName("tipadlari")
     val vehicleModels: List<VehicleModel?>? = null,
     val isSelectedVehicle: SelectedVehicleFilterItem? = null

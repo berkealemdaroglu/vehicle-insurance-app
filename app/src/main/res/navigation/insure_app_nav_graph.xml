@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home.HomeFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/creditCalculatorFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.creditcalculator.CreditCalculatorFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.creditcalculator.CreditCalculatorFragment"
         android:label="fragment_credit_calculator"
         tools:layout="@layout/fragment_credit_calculator">
         <argument
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.splash.SplashFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/vehicleSearchListFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detailList.VehicleSearchListFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.detailList.VehicleSearchListFragment"
         android:label="fragment_vehicle_search_list"
         tools:layout="@layout/fragment_vehicle_search_list">
         <argument
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/vehicleDetailFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.detail.VehicleDetailFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.detail.VehicleDetailFragment"
         android:label="fragment_vehicle_detail"
         tools:layout="@layout/fragment_vehicle_detail">
         <argument
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/blogFragment"
-        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.blog.BlogFragment"
+        android:name="com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.blog.BlogFragment"
         android:label="fragment_blog"
         tools:layout="@layout/fragment_blog">
         <argument

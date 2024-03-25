@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.creditcalculator.CreditCalculatorFragment">
+    tools:context=".presentation.ui.creditcalculator.CreditCalculatorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -221,7 +221,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/creditCalculatorButton"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_40dp"
+            android:layout_height="@dimen/margin_48dp"
             android:layout_gravity="center"
             android:layout_marginVertical="@dimen/margin_12dp"
             android:background="@drawable/stroke_home_credit_button_background"
@@ -515,7 +515,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/creditResultCardView" />
 
-        <com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.customViews.VehicleInsuranceCreditRatesCustomView
+        <com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.customviews.VehicleInsuranceCreditRatesCustomView
             android:id="@+id/vehicleInsuranceCreditRatesCustomView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
