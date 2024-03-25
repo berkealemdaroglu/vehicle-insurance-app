@@ -74,9 +74,11 @@ fun String.replaceMonth(): String {
 fun EditText.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            /* no-op */
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            /* no-op */
         }
 
         override fun afterTextChanged(editable: Editable?) {
@@ -92,9 +94,11 @@ fun EditText.afterTextChangedPriceFormat(afterTextChanged: (Editable?) -> Unit) 
     val editText = this
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            /* no-op */
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            /* no-op */
         }
 
         override fun afterTextChanged(editable: Editable?) {
@@ -125,11 +129,9 @@ fun EditText.afterTextChangedPriceFormat(afterTextChanged: (Editable?) -> Unit) 
 fun EditText.afterTextChangedInsuranceFormat(afterTextChanged: (Editable?) -> Unit) {
     val editText = this
     this.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* no-op */ }
 
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* no-op */ }
 
         override fun afterTextChanged(editable: Editable?) {
             if (isFormatting || editable.toString() == lastFormatted) {
@@ -162,11 +164,9 @@ fun SeekBar.seekBarChangeListener(onSeekBarChangeListener: (Int) -> Unit) {
             onSeekBarChangeListener.invoke(progress)
         }
 
-        override fun onStartTrackingTouch(seekBar: SeekBar?) {
-        }
+        override fun onStartTrackingTouch(seekBar: SeekBar?) { /* no-op */ }
 
-        override fun onStopTrackingTouch(seekBar: SeekBar?) {
-        }
+        override fun onStopTrackingTouch(seekBar: SeekBar?) { /* no-op */ }
     })
 }
 

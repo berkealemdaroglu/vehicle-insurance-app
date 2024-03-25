@@ -1,9 +1,10 @@
 package com.ersinberkealemdaroglu.arackaskodegerlistesi.di
 
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.datasource.InsureDataSource
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.datasource.datasourceImp.InsuranceDataSourceImp
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.InsureRepository
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.repositoryImp.InsureRepositoryImp
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.InsureUseCase
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.service.InsureService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +26,8 @@ object DiModule {
 
     @Singleton
     @Provides
-    fun providerInsureUseCase(insureRepository: InsureRepository): InsureUseCase {
-        return InsureUseCase(insureRepository)
+    fun providerInsureDataSource(insureService: InsureService): InsureDataSource {
+        return InsuranceDataSourceImp(insureService)
     }
 
     @Qualifier
@@ -48,6 +49,4 @@ object DiModule {
     fun providerDispatcherMain(): CoroutineDispatcher {
         return Dispatchers.Main
     }
-
-
 }

@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:background="@color/app_background_color"
         android:orientation="vertical"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".presentation.ui.home.HomeFragment">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/yearButton"
@@ -69,7 +69,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/creditCalculatorButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin_40dp"
+                    android:layout_height="@dimen/margin_48dp"
                     android:layout_gravity="center"
                     android:layout_marginVertical="@dimen/margin_12dp"
                     android:background="@drawable/stroke_home_credit_button_background"

@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/app_background_color"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".presentation.ui.MainActivity">
 
-    <com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.customviews.CustomToolbar
+    <com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.customviews.CustomToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -1,11 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Araç Kasko Değer Listesi</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kredi_hesapla">Kredi Hesapla</string>
     <string name="yine_de_hesapla">Yine de hesapla</string>
     <string name="arac_kasko_deger_listesi">Araç Kasko Değer Listesi</string>
     <string name="arac_detay">Araç Detay</string>
-    <string name="marka_model_ve_yil_ile_arama_yapabilirsiz">Marka, model ve yıl ile arama yapabilirsiz...</string>
+    <string name="marka_model_ve_yil_ile_arama_yapabilirsiz">Marka, model ve yıl ile arama yapabilirsiz…</string>
     <string name="_400_bin_tl_alti_araclar">400 bin TL Altı Araçlar</string>
     <string name="kredi_hesaplama">Kredi Hesaplama</string>
     <string name="model_yili">Model Yılı</string>
@@ -13,9 +13,9 @@
     <string name="motor_gucu">Motor Gücü</string>
     <string name="marka">Marka</string>
     <string name="model">Model</string>
-    <string name="kasko_degeri">Kasko Değeri: </string>
+    <string name="home_page_kasko_degeri">Kasko Değeri: %s ₺</string>
     <string name="secili_arac">Seçili Araç:</string>
-    <string name="hyundai_i20_2014_cvvt_go">Hyundai i20 2014 CVVT-GO...</string>
+    <string name="hyundai_i20_2014_cvvt_go">Hyundai i20 2014 CVVT-GO…</string>
     <string name="arac_kasko_degeri">Araç Kasko Değeri:</string>
     <string name="kredi_tutar">Kredi Tutarı</string>
     <string name="vade_oran">Faiz Oranı</string>
@@ -67,7 +67,11 @@
     <string name="kinci_el_ara_lar_i_in_en_fazla_9_ya_ndaki_ara_lara_kredi_kmaktad_r_ara_ya_bankadan_bankaya_de_i_iklik_g_stermektedir">İkinci el araçlar için en fazla 9 yaşındaki araçlara kredi çıkmaktadır. (Araç yaşı bankadan bankaya değişiklik göstermektedir.)</string>
     <string name="item_selected_icon">item selected icon</string>
     <string name="text_background_color">text background color</string>
-    <string name="credit_amount_seekbar_description">Kredi miktarını ayarlamak için kaydırın</string>
-    <string name="vade_seekbar_desc">Vade miktarını ayarlamak için kaydırın</string>
+    <string name="credit_amount_seekbar_description">Kredi miktarını ayarlamak</string>
+    <string name="vade_seekbar_desc">Vade miktarını ayarlamak</string>
     <string name="ara_listesi">araç listesi</string>
+    <string name="text_with_currency">%s ₺</string>
+    <string name="text_currency">₺</string>
+    <string name="format_vehicle_information">%s %s %s</string>
+    <string name="default_interest_percent">4.0</string>
 </resources>

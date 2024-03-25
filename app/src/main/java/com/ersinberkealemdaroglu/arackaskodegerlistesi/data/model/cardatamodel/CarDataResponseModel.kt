@@ -13,7 +13,7 @@ data class CarDataResponseModelItem(
     @SerializedName("vehicle_brand")
     val vehicleBrand: String? = null,
     @SerializedName("vehicle_hp")
-    val vehicleHp: String? = null,
+    val vehicleHp: String? = "",
     @SerializedName("vehicle_loan_amount")
     val vehicleLoanAmount: Int? = null,
     @SerializedName("vehicle_model")
