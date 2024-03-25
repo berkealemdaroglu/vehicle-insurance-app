@@ -1,4 +1,4 @@
-package com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.home
+package com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,27 +6,28 @@ import androidx.lifecycle.viewModelScope
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.VehicleInsuranceResponse
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.blog.VehicleBlogResponse
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.remote.repository.InsureRepository
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.di.DiModule
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.InsureUseCase
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.VehicleInsuranceMapper
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.VehicleInsuranceFilter
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.datastore.DataStoreManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.model.FilterVehicleModel
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.ui.base.BaseViewModel
+import com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.base.BaseViewModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.toDateWithFormat
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val insureUseCase: InsureUseCase, @DiModule.DispatcherIO private val dispatcherIO: CoroutineDispatcher
+    private val insureRepository: InsureRepository, @DiModule.DispatcherIO private val dispatcherIO: CoroutineDispatcher
 ) : BaseViewModel() {
 
-    lateinit var vehicleInsuranceMapper: VehicleInsuranceMapper
+    lateinit var vehicleInsuranceFilter: VehicleInsuranceFilter
 
     private val dataStoreManager = DataStoreManager()
     private val gson = Gson()
@@ -35,16 +36,16 @@ class SharedViewModel @Inject constructor(
     val errorMessage: LiveData<String?> = _errorMessage
 
     private val _splashLoading = MutableStateFlow<Boolean?>(null)
-    val splashLoading: StateFlow<Boolean?> = _splashLoading
+    val splashLoading: StateFlow<Boolean?> = _splashLoading.asStateFlow()
 
     private val _selectedFilterVehicle = MutableStateFlow<FilterVehicleModel?>(null)
-    val selectedFilterVehicle: StateFlow<FilterVehicleModel?> = _selectedFilterVehicle
+    val selectedFilterVehicle: StateFlow<FilterVehicleModel?> = _selectedFilterVehicle.asStateFlow()
 
     private val _selectedVehicle = MutableStateFlow<Brand?>(null)
-    val selectedVehicle: StateFlow<Brand?> = _selectedVehicle
+    val selectedVehicle: StateFlow<Brand?> = _selectedVehicle.asStateFlow()
 
     private val _getVehicleBlogData = MutableStateFlow<VehicleBlogResponse?>(null)
-    val getVehicleBlogData: StateFlow<VehicleBlogResponse?> = _getVehicleBlogData
+    val getVehicleBlogData: StateFlow<VehicleBlogResponse?> = _getVehicleBlogData.asStateFlow()
 
     private var _setIsBlogVisible: Boolean? = null
     val getIsBlogVisible: Boolean? get() = _setIsBlogVisible
@@ -74,7 +75,7 @@ class SharedViewModel @Inject constructor(
     private fun checkUpdate(isFirstOpen: Boolean) {
 
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.checkUpdate().collectNetworkResult(onSuccess = { data ->
+            insureRepository.checkUpdate().collectNetworkResult(onSuccess = { data ->
                 _setIsBlogVisible = data.isBlogVisible
 
                 data.updateDate?.let { updateDate ->
@@ -118,16 +119,16 @@ class SharedViewModel @Inject constructor(
 
     private fun initMapper() {
         viewModelScope.launch(dispatcherIO) {
-            vehicleInsuranceMapper = VehicleInsuranceMapper(gson.fromJson(dataStoreManager.readVehicleData(), VehicleInsuranceResponse::class.java))
+            vehicleInsuranceFilter = VehicleInsuranceFilter(gson.fromJson(dataStoreManager.readVehicleData(), VehicleInsuranceResponse::class.java))
         }
     }
 
     private fun getInsuranceVehicleData() {
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.getVehicleInsurance().collectNetworkResult(onSuccess = { data ->
+            insureRepository.getVehicleInsurance().collectNetworkResult(onSuccess = { data ->
                 dataStoreManager.storeVehicleData(gson.toJson(data))
                 dataStoreManager.updateIsNeedDataRequest(false)
-                vehicleInsuranceMapper = VehicleInsuranceMapper(data)
+                vehicleInsuranceFilter = VehicleInsuranceFilter(data)
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
                 dataStoreManager.updateIsNeedDataRequest(true)
@@ -137,7 +138,7 @@ class SharedViewModel @Inject constructor(
 
     private fun getLowPriceVehicle() {
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.getLowVehicles().collectNetworkResult(onSuccess = { data ->
+            insureRepository.getLowVehicles().collectNetworkResult(onSuccess = { data ->
                 dataStoreManager.storeLowPriceVehicleData(gson.toJson(data)) {
                     _splashLoading.emit(true)
                 }
@@ -150,7 +151,7 @@ class SharedViewModel @Inject constructor(
 
     fun getVehicleBlog() {
         viewModelScope.launch(dispatcherIO) {
-            insureUseCase.getVehicleBlog().collectNetworkResult(onSuccess = { data ->
+            insureRepository.getVehicleBlog().collectNetworkResult(onSuccess = { data ->
                 _getVehicleBlogData.emit(data)
             }, onError = { errorMessage ->
                 _errorMessage.postValue(errorMessage)
