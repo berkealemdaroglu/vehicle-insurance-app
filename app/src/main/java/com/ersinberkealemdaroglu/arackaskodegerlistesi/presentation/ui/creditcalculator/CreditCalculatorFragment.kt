@@ -67,8 +67,8 @@ class CreditCalculatorFragment : BaseFragment<FragmentCreditCalculatorBinding, C
 
                 brand.vehicleMaxCreditExpiry?.let { maxCreditExpiry ->
                     expireEdittext.setText(maxCreditExpiry)
-                    expireDateSeekBar.max = maxCreditExpiry.toInt()
-                    expireDateSeekBar.progress = maxCreditExpiry.toInt()
+                    expireDateSeekBar.max = maxCreditExpiry.replaceMonth().toInt()
+                    expireDateSeekBar.progress = maxCreditExpiry.replaceMonth().toInt()
                 }
                 interestPercentEdittext.setText(getText(R.string.default_interest_percent))
 
