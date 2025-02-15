@@ -39,14 +39,14 @@
         android:layout_marginBottom="@dimen/margin_8dp"
         android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
-        android:maxLines="1"
-        android:minLines="1"
+        android:maxLines="2"
+        android:minLines="2"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_text_14sp"
+        android:textSize="@dimen/font_text_16sp"
         app:layout_constraintBottom_toBottomOf="@id/imgBackground"
         app:layout_constraintEnd_toEndOf="@+id/imgBackground"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/imgBackground"
-        tools:text="Hyundai i20 2014 jump 1.2" />
+        tools:text="Adaptif Hız Sabitleme daha fazla kazaya sebep oluyor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

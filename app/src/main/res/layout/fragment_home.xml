@@ -84,58 +84,6 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_12dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginEnd="@dimen/margin_8dp"
-                android:layout_weight="2"
-                android:ellipsize="end"
-                android:fontFamily="@font/poppins_medium"
-                android:maxLines="1"
-                android:minLines="1"
-                android:text="@string/low_price_text"
-                android:textColor="@color/toolbar_text_color"
-                android:textSize="@dimen/font_text_16sp" />
-
-            <TextView
-                android:id="@+id/lowPriceVehicleBtnGoSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginEnd="@dimen/margin_16dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/poppins_light"
-                android:gravity="end"
-                android:maxLines="1"
-                android:minLines="1"
-                android:paddingVertical="@dimen/margin_4dp"
-                android:text="@string/tumunu_gor"
-                android:textColor="@color/secondary_color"
-                android:textSize="@dimen/font_text_14sp" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lowPriceVehicleRV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/margin_12dp"
-            android:paddingEnd="@dimen/margin_12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_fragment_cars" />
-
-        <LinearLayout
             android:id="@+id/blogTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

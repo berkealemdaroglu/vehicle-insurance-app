@@ -57,70 +57,13 @@ class SharedViewModel @Inject constructor(
     val getBrand: String? get() = _setBrand
 
     init {
-        checkIsNeedDataRequest()
-    }
-
-    private fun checkIsNeedDataRequest() {
-        viewModelScope.launch {
-            val isNeedDataRequest = dataStoreManager.readIsNeedDataRequest()
-            checkUpdate(isNeedDataRequest)
-        }
+        callRequests()
     }
 
     fun callRequests() {
         getInsuranceVehicleData()
         getLowPriceVehicle()
-    }
-
-    private fun checkUpdate(isFirstOpen: Boolean) {
-
-        viewModelScope.launch(dispatcherIO) {
-            insureRepository.checkUpdate().collectNetworkResult(onSuccess = { data ->
-                _setIsBlogVisible = data.isBlogVisible
-
-                data.updateDate?.let { updateDate ->
-
-                    val savedUpdateDate = dataStoreManager.readDateForUpdate()
-
-                    if (isFirstOpen) {
-                        dataStoreManager.storeDateForUpdate(updateDate)
-                        callRequests()
-                    } else {
-
-                        val formattedUpdateDate = updateDate.toDateWithFormat {
-                            _errorMessage.postValue(it.message)
-                        } ?: return@collectNetworkResult // Return early if null
-
-                        val formattedSavedUpdateDate = savedUpdateDate.toDateWithFormat {
-                            _errorMessage.postValue(it.message)
-                        } ?: return@collectNetworkResult // Return early if null
-
-                        if (formattedUpdateDate.after(formattedSavedUpdateDate)) {
-                            dataStoreManager.clearDataStore()
-                            dataStoreManager.updateIsNeedDataRequest(false)
-                            dataStoreManager.storeDateForUpdate(updateDate)
-                            callRequests()
-
-                        } else {
-                            _splashLoading.emit(true)
-                        }
-                    }
-                } ?: run {
-                    callRequests()
-                }
-
-            }, onError = { errorMessage ->
-                _errorMessage.postValue(errorMessage)
-            }, isAutoLoading = false)
-
-            initMapper()
-        }
-    }
-
-    private fun initMapper() {
-        viewModelScope.launch(dispatcherIO) {
-            vehicleInsuranceFilter = VehicleInsuranceFilter(gson.fromJson(dataStoreManager.readVehicleData(), VehicleInsuranceResponse::class.java))
-        }
+        getVehicleBlog()
     }
 
     private fun getInsuranceVehicleData() {

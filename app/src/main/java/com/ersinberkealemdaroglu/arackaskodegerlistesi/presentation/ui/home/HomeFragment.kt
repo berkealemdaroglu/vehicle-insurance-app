@@ -7,10 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.R
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.Brand
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.data.model.cardatamodel.CarDataResponseModelItem
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.databinding.FragmentHomeBinding
-import com.ersinberkealemdaroglu.arackaskodegerlistesi.domain.datastore.DataStoreManager
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.SharedViewModel
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.base.BaseFragment
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.presentation.ui.home.adapter.HomeFragmentBlogAdapter
@@ -22,7 +20,6 @@ import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.expand
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.formatPriceWithDotsForDecimal
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.gone
 import com.ersinberkealemdaroglu.arackaskodegerlistesi.utils.extensions.vehicleLoanAmountCalculator
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,18 +28,11 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(FragmentHomeBinding::inflate) {
 
     override val viewModel: SharedViewModel by activityViewModels()
-    private lateinit var homeFragmentLowPriceVehicleAdapter: HomeFragmentLowPriceVehicleAdapter
-    private lateinit var homeBlogAdapter: HomeFragmentBlogAdapter
-    private val dataStoreManager = DataStoreManager()
+    private val homeBlogAdapter: HomeFragmentBlogAdapter = HomeFragmentBlogAdapter()
 
     override fun initUI(view: View) {
-        viewModel.getVehicleBlog()
-
         insureButtonHandle()
         selectedVehicleState()
-        getLowPriceVehicles()
-        openCreditCalculatorFragment()
-        vehicleBlogObserve()
         setRecyclerView()
     }
 
@@ -152,48 +142,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, SharedViewModel>(Fragment
         }
     }
 
-    private fun getLowPriceVehicles() {
-        homeFragmentLowPriceVehicleAdapter = HomeFragmentLowPriceVehicleAdapter()
-        binding?.lowPriceVehicleRV?.adapter = homeFragmentLowPriceVehicleAdapter
-
-        lifecycleScope.launch {
-            val lowVehicleData = dataStoreManager.readLowPriceVehicleData()
-            if (lowVehicleData.isNotEmpty()) {
-                val gson = Gson()
-                val vehicleData = gson.fromJson(lowVehicleData, CarDataResponseModel::class.java)
-                homeFragmentLowPriceVehicleAdapter.setCarDataModel(vehicleData)
-                openCarSearchFragment(vehicleData)
-            }
-        }
-    }
-
-    private fun openCreditCalculatorFragment() {
-        homeFragmentLowPriceVehicleAdapter.onItemClicked = { carData ->
-            val action = HomeFragmentDirections.actionHomeFragmentToVehicleDetailFragment(
-                carData
-            )
-            findNavController().navigate(action)
-        }
-
-    }
-
-    private fun openCarSearchFragment(carDataResponseModel: CarDataResponseModel) {
-        binding?.lowPriceVehicleBtnGoSearch?.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToVehicleSearchListFragment(
-                carDataResponseModel
-            )
-            findNavController().navigate(action)
-        }
-    }
-
     private fun setRecyclerView() {
-        homeBlogAdapter = HomeFragmentBlogAdapter()
         homeBlogAdapter.onItemClickCallback = { vehicleBlogItem ->
             val action = HomeFragmentDirections.actionHomeFragmentToBlogFragment(vehicleBlogItem)
             findNavController().navigate(action)
         }
         binding?.blogRV?.adapter = homeBlogAdapter
         binding?.blogRV?.setHasFixedSize(true)
+
+        vehicleBlogObserve()
     }
 
     private fun vehicleBlogObserve() {
